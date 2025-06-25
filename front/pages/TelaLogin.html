@@ -7,46 +7,70 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
-  
-  <body class="bg-gray-100 min-h-screen bg-cover bg-center" style="background-image: url('https://hyppet.com/wp-content/uploads/2024/06/11ef0df4-3b63-44b9-b638-c0e930d93bd4-e1750272550279.png');">
-    <nav class="bg-purple-800 opacity-100 p-4">
+
+  <body class="bg-gray-100 min-h-screen bg-cover bg-center flex flex-col" style="background-image: url('https://hyppet.com/wp-content/uploads/2024/06/11ef0df4-3b63-44b9-b638-c0e930d93bd4-e1750272550279.png'); background-size: cover; background-attachment: fixed;">
+    <!-- Barra de Navegação Fixa no Topo -->
+    <nav class="bg-purple-800 opacity-100 p-4 fixed top-0 left-0 w-full z-50">
       <div class="container mx-auto flex justify-between items-center">
-        <a class="text-white font-bold text-xl" href="#">Adote BH</a>
-        <div>
-          <a class="text-blue-300 hover:text-white mx-2" href="#">Início</a>
+        <a class="text-white font-bold text-2xl sm:text-3xl md:text-4xl" href="#">
+          <span class="text-white">Adote</span> <span class="text-orange-400">BH</span>
+        </a>
+        <div class="space-x-4">
+          <a class="text-gray-300 font-bold hover:text-white" href="#quero-adotar">Quero Adotar</a>
+          <a class="text-gray-300 font-bold hover:text-white" href="#seja-nosso-parceiro">Seja Nosso Parceiro</a>
+          <a class="text-white bg-purple-600 hover:bg-purple-500 px-6 py-2 rounded" href="#entrar">Entrar</a>
         </div>
       </div>
     </nav>
-    
-    <!-- Formulário com fundo transparente ou suavizado -->
-    <div class="ml-8 mt-8 p-4 w-full max-w-md min-h-[500px] rounded-lg bg-transparent shadow-lg">
-      <h2 class="font-bold mb-4 text-3xl text-left">Boas-vindas ao Adote BH 🐶😻</h2>
-      <form id="formLogin" class="bg-transparent shadow-md rounded p-4" onsubmit="login()">
-        <div class="mb-4">
-          <label for="email" class="block text-gray-700 font-bold mb-2">E-mail</label>
-          <input type="email" id="email" class="w-full px-3 py-2 border rounded" required>
-        </div>
-        <div class="mb-4">
-          <label for="senha" class="block text-gray-700 font-bold mb-2">Senha</label>
-          <input type="password" id="senha" class="w-full px-3 py-2 border rounded" required>
-        </div>
 
-        <!-- Botão alinhado à esquerda -->
-        <div class="flex justify-start mt-4">
-          <button type="submit" class="bg-purple-800 text-white px-6 py-2 rounded hover:bg-purple-600">
-            Entrar
-          </button>
-        </div>
+    <!-- Espaço de Compensação para a Tarja Fixa -->
+    <div class="pt-24 sm:pt-32 md:pt-36 flex-grow"> <!-- Compensa a altura da tarja fixa e faz o conteúdo expandir -->
+      <div class="flex justify-center sm:justify-start">
+        <!-- Formulário de Login -->
+        <div class="mx-auto sm:mx-4 p-4 w-full max-w-md min-h-[500px] bg-white shadow-lg rounded-lg">
+          <h2 class="font-bold mb-4 text-2xl sm:text-3xl text-left">Boas-vindas ao Adote BH 🐶😻</h2>
+          <form id="formLogin" class="bg-transparent shadow-md rounded p-4" onsubmit="login()">
+            <div class="mb-4">
+              <label for="email" class="block text-gray-700 font-bold mb-2">E-mail</label>
+              <input type="email" id="email" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+              <label for="senha" class="block text-gray-700 font-bold mb-2">Senha</label>
+              <input type="password" id="senha" class="w-full px-3 py-2 border rounded" required>
+            </div>
 
-        <!-- Links alinhados à esquerda -->
-        <div class="flex w-full justify-start mt-4">
-          <a href="esqueci-senha.html" class="text-sm text-blue-700 hover:text-blue-700 w-full text-left">Esqueci a senha</a>
+            <div class="flex justify-center mt-4">
+              <button type="submit" class="bg-purple-800 text-white px-6 py-2 rounded hover:bg-purple-600">
+                Entrar
+              </button>
+            </div>
+
+            <div class="flex w-full justify-start mt-4">
+              <a href="esqueci-senha.html" class="text-sm text-blue-700 hover:text-blue-700 w-full text-center">Esqueci a senha</a>
+            </div>
+            <div class="flex w-full justify-start mt-4">
+              <a href="cadastro.html" class="text-blue-700 hover:text-blue-700 w-full text-center">Cadastre-se aqui</a>
+            </div>
+          </form>
         </div>
-        <div class="flex w-full justify-start mt-4">
-          <a href="cadastro.html" class="text-blue-700 hover:text-blue-700 w-full text-left">Cadastre-se aqui</a>  
-        </div>
-      </form>
+      </div>
     </div>
+
+    <!-- Rodapé (Footer) Fixo na Parte Inferior -->
+    <footer class="bg-purple-800 text-white py-6 mt-16">
+      <div class="container mx-auto text-center">
+        <p class="text-lg font-bold">Adote BH</p>
+        <p class="text-sm">Ajudamos animais a encontrar um lar amoroso. Junte-se a nós!</p>
+        <div class="mt-4 space-x-6">
+          <a href="#" class="text-white hover:text-orange-400">Sobre nós</a>
+          <a href="#" class="text-white hover:text-orange-400">Termos de Serviço</a>
+          <a href="#" class="text-white hover:text-orange-400">Política de Privacidade</a>
+        </div>
+        <div class="mt-4">
+          <p class="text-sm">&copy; 2025 Adote BH. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
 
     <script src="./assents/js/index.js"></script>
   </body>
