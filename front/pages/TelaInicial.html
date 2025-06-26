@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>AdoteBH - Seu Portal de Adoção de Pets em Belo Horizonte</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center antialiased">
+
+    <header class="bg-purple-800 fixed top-0 left-0 w-full z-50 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center h-16">
+            <a href="#home" class="text-white font-extrabold text-2xl sm:text-3xl tracking-wide" aria-label="Página inicial Adote BH">
+                Adote<span class="text-orange-400">BH</span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-6" aria-label="Navegação Principal">
+                <a href="#quero-adotar" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Quero Adotar</a>
+                <a href="#seja-nosso-parceiro" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
+                <a href="#entrar" class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow transition duration-300 ease-in-out">
+                    Entrar
+                </a>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-label="Abrir menu de navegação">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="md:hidden bg-purple-700 pb-4 hidden" aria-label="Navegação Mobile">
+            <a href="#quero-adotar" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero Adotar</a>
+            <a href="#seja-nosso-parceiro" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
+            <a href="#entrar" class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded-full text-sm shadow transition duration-300 ease-in-out text-center">
+                Entrar
+            </a>
+        </nav>
+    </header>
+
+    <div class="pt-16 sm:pt-20 md:pt-24 w-full"></div>
+
+    <section id="home" class="bg-gradient-to-r from-purple-100 to-purple-200 w-full flex flex-col lg:flex-row items-center justify-center py-16 px-6 lg:px-12 min-h-[calc(100vh-6rem)]">
+        <div class="lg:w-1/2 flex justify-center mb-10 lg:mb-0 lg:pr-12">
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr83R7UQ-_EGm38-ncngHIBtQomTaKutGdbA&s"
+                class="rounded-3xl w-72 md:w-96 lg:w-[450px] object-cover shadow-2xl transform hover:scale-105 transition-transform duration-500 ease-in-out"
+                alt="Gatinho brincando feliz em um ambiente iluminado"
+            />
+        </div>
+        <div class="lg:w-1/2 text-center lg:text-left">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-900 leading-tight mb-6 animate-fade-in-up">
+                Encontre seu Novo Melhor Amigo em <span class="text-orange-600">Belo Horizonte!</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto lg:mx-0 animate-fade-in-up delay-200">
+                Conectamos corações e patinhas, facilitando a adoção responsável de cães e gatos.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up delay-400">
+                <a href="#galeria-pets" class="bg-purple-800 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-purple-900 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    Adotar um Pet
+                </a>
+                <a href="#divulgar-pet" class="bg-purple-200 text-purple-800 font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-purple-300 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    Divulgar um Pet
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full max-w-4xl px-6 py-12">
+        <h2 class="text-3xl font-bold text-purple-800 mb-6 text-center">Nossos Amiguinhos Esperando por um Lar</h2>
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <input
+                type="text"
+                placeholder="Pesquisar por nome ou raça..."
+                aria-label="Campo de pesquisa de pets"
+                class="flex-grow p-3 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+            />
+            <select
+                aria-label="Filtrar por espécie"
+                class="p-3 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm bg-white"
+            >
+                <option value="">Todas as Espécies</option>
+                <option value="dog">Cachorros</option>
+                <option value="cat">Gatos</option>
+            </select>
+            <select
+                aria-label="Filtrar por porte"
+                class="p-3 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm bg-white"
+            >
+                <option value="">Qualquer Porte</option>
+                <option value="small">Pequeno</option>
+                <option value="medium">Médio</option>
+                <option value="large">Grande</option>
+            </select>
+        </div>
+
+        <div id="galeria-pets" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            
+
+            <article class="bg-white border border-purple-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out overflow-hidden">
+                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQAAKBR72ismGV8HcGhKP0KSnBcT5GvMWxIrCbecWV_q3GxnrXIlXfhKMt5rfOR" alt="Gato siamês descansando" class="w-full h-48 object-cover object-center">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-purple-900 mb-1">Luna</h3>
+                    <p class="text-sm text-gray-600 mb-2">Gato • Médio • 1 Ano</p>
+                    <p class="text-gray-700 text-sm line-clamp-2">Luna é uma gatinha independente, mas que adora um colo e um bom arranhador. Perfeita para quem busca companhia.</p>
+                    <a href="#" class="mt-3 inline-block bg-purple-700 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-800 transition">Ver Detalhes</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="divulgar-pet" class="bg-purple-700 text-white w-full py-16 px-6 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">Tem um Pet para Divulgar?</h2>
+        <p class="text-lg mb-8 max-w-2xl mx-auto">
+            Ajude-nos a encontrar um lar para mais animais! Se você tem um pet para adoção, divulgue-o em nossa plataforma.
+        </p>
+        <a href="#contato-divulgacao" class="bg-orange-400 text-purple-900 font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-orange-500 transition duration-300 ease-in-out transform hover:-translate-y-1">
+            Quero Divulgar Agora
+        </a>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-300 w-full py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2025 AdoteBH - Todos os direitos reservados.</p>
+            <nav class="flex justify-center space-x-6">
+                <a href="#politica-privacidade" class="hover:text-white transition">Política de Privacidade</a>
+                <a href="#termos-uso" class="hover:text-white transition">Termos de Uso</a>
+                <a href="#contato" class="hover:text-white transition">Contato</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').onclick = function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+    </script>
+</body>
+</html>
