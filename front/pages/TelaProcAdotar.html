@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>AdoteBH - Processo de Adoção</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .step-icon {
+            @apply flex items-center justify-center w-12 h-12 rounded-full bg-purple-200 text-purple-800 font-bold text-xl;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center antialiased">
+
+    <header class="bg-purple-800 fixed top-0 left-0 w-full z-50 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center h-16">
+            <a href="index.html" class="text-white font-extrabold text-2xl sm:text-3xl tracking-wide" aria-label="Página inicial Adote BH">
+                Adote<span class="text-orange-400">BH</span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-6" aria-label="Navegação Principal">
+                <a href="index.html#quero-adotar" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Quero Adotar</a>
+                <a href="index.html#seja-nosso-parceiro" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
+                <a href="TelaLogin.html" class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow transition duration-300 ease-in-out">
+                    Entrar
+                </a>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-label="Abrir menu de navegação">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="md:hidden bg-purple-700 pb-4 hidden" aria-label="Navegação Mobile">
+            <a href="index.html#quero-adotar" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero Adotar</a>
+            <a href="index.html#seja-nosso-parceiro" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
+            <a href="TelaLogin.html" class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded-full text-sm shadow transition duration-300 ease-in-out text-center">
+                Entrar
+            </a>
+        </nav>
+    </header>
+
+    <div class="pt-16 sm:pt-20 md:pt-24 w-full"></div>
+
+    <main class="container mx-auto px-4 py-8 lg:py-12 max-w-4xl">
+        <section class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-purple-900 mb-4">Seu Caminho para Adotar um Amigo</h1>
+            <p class="text-lg text-gray-700">Entenda cada etapa do processo de adoção responsável no AdoteBH.</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-purple-800 mb-8 text-center">Passo a Passo da Adoção</h2>
+            <div class="space-y-8">
+                <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-xl shadow-md border border-purple-100">
+                    <div class="step-icon flex-shrink-0 mb-4 md:mb-0 md:mr-6">1</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Explore Nossos Pets</h3>
+                        <p class="text-gray-700 leading-relaxed">Navegue pela nossa galeria de animais disponíveis. Use os filtros de espécie, porte e idade para encontrar o companheiro que melhor se encaixa no seu estilo de vida e nas suas expectativas.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-xl shadow-md border border-purple-100">
+                    <div class="step-icon flex-shrink-0 mb-4 md:mb-0 md:mr-6">2</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Manifeste seu Interesse</h3>
+                        <p class="text-gray-700 leading-relaxed">Ao encontrar um pet que você se apaixonou, clique em "Ver Detalhes". Lá você encontrará mais informações sobre ele e um botão ou formulário para manifestar seu interesse na adoção. Preencha com atenção!</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-xl shadow-md border border-purple-100">
+                    <div class="step-icon flex-shrink-0 mb-4 md:mb-0 md:mr-6">3</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Entrevista e Visita</h3>
+                        <p class="text-gray-700 leading-relaxed">Após a manifestação de interesse, entraremos em contato para agendar uma conversa. Essa é uma oportunidade para tirarmos dúvidas, conhecermos suas expectativas e garantir que o pet terá um lar adequado e cheio de amor. Uma visita ao local onde o animal se encontra também poderá ser agendada.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-xl shadow-md border border-purple-100">
+                    <div class="step-icon flex-shrink-0 mb-4 md:mb-0 md:mr-6">4</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Assinatura do Termo de Adoção</h3>
+                        <p class="text-gray-700 leading-relaxed">Se tudo estiver alinhado, o último passo é a assinatura do Termo de Adoção. Este documento formaliza a responsabilidade sobre o animal e assegura que ele receberá os cuidados necessários para uma vida feliz e saudável.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center bg-white p-6 rounded-xl shadow-md border border-purple-100">
+                    <div class="step-icon flex-shrink-0 mb-4 md:mb-0 md:mr-6">5</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Boas-Vindas ao Seu Novo Amigo!</h3>
+                        <p class="text-gray-700 leading-relaxed">Parabéns! É hora de levar seu novo companheiro para casa. Lembre-se que a adaptação pode levar um tempo, então tenha paciência e ofereça muito carinho e amor. O AdoteBH estará disponível para suporte caso precise.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-purple-100 p-8 rounded-xl shadow-inner mb-12 text-center">
+            <h2 class="text-3xl font-bold text-purple-800 mb-6">Requisitos para Adotar</h2>
+            <ul class="list-disc list-inside text-gray-700 space-y-2 max-w-2xl mx-auto text-left">
+                <li>Ser maior de 18 anos.</li>
+                <li>Apresentar documento de identidade (RG ou CNH) e comprovante de residência.</li>
+                <li>Ter ciência da responsabilidade e dos custos envolvidos na criação de um animal (alimentação, veterinário, etc.).</li>
+                <li>Garantir um ambiente seguro e adequado para o animal (espaço, abrigo, proteção contra fugas).</li>
+                <li>Comprometer-se a oferecer amor, carinho e todos os cuidados necessários.</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-8 rounded-xl shadow-md border border-purple-100">
+            <h2 class="text-3xl font-bold text-purple-800 mb-6 text-center">Perguntas Frequentes (FAQ)</h2>
+            <div class="space-y-6">
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-semibold text-purple-900">
+                        Qual é o custo para adotar um animal?
+                        <span class="group-open:rotate-180 transition-transform duration-300">
+                            <svg class="w-6 h-6 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </summary>
+                    <p class="mt-2 text-gray-700">A adoção no AdoteBH não tem custo. Nosso objetivo é encontrar lares amorosos para os animais. No entanto, lembre-se que ter um pet envolve custos com alimentação, saúde e bem-estar.</p>
+                </details>
+
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-semibold text-purple-900">
+                        Os animais são vacinados e castrados?
+                        <span class="group-open:rotate-180 transition-transform duration-300">
+                            <svg class="w-6 h-6 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </summary>
+                    <p class="mt-2 text-gray-700">A maioria dos animais disponibilizados para adoção já são vermifugados, vacinados e castrados, ou com encaminhamento para esses procedimentos, dependendo da idade e condição. As informações específicas de cada pet estarão na sua página de detalhes.</p>
+                </details>
+
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-semibold text-purple-900">
+                        Posso devolver o animal se não me adaptar?
+                        <span class="group-open:rotate-180 transition-transform duration-300">
+                            <svg class="w-6 h-6 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </summary>
+                    <p class="mt-2 text-gray-700">A adoção é um compromisso sério. Pedimos que a decisão de adotar seja muito bem pensada. Em casos extremos e justificados de inadaptação, entre em contato conosco para avaliarmos a situação e buscarmos a melhor solução para o bem-estar do animal.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="text-center py-12">
+            <h2 class="text-3xl font-bold text-purple-800 mb-6">Pronto para Encontrar seu Novo Amigo?</h2>
+            <a href="TelaInicial.html" class="bg-purple-800 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-purple-900 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                Ver Pets para Adoção
+            </a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 w-full py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2025 AdoteBH - Todos os direitos reservados.</p>
+            <nav class="flex justify-center space-x-6">
+                <a href="#politica-privacidade" class="hover:text-white transition">Política de Privacidade</a>
+                <a href="#termos-uso" class="hover:text-white transition">Termos de Uso</a>
+                <a href="#contato" class="hover:text-white transition">Contato</a>
+            </nav>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('mobile-menu-button').onclick = function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+    </script>
+</body>
+</html>
