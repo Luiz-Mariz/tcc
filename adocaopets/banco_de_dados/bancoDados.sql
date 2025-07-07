@@ -60,16 +60,14 @@ CREATE TABLE Animal (
     nome VARCHAR(100),
     idade INT,
     porte ENUM('pequeno', 'medio', 'grande'),
-    sexo ENUM('M', 'F'),
+    sexo ENUM('Macho', 'Femea'),
     descricao TEXT,
     foto_url VARCHAR(255),
     status ENUM('disponível', 'adotado', 'em tratamento', 'perdido') DEFAULT 'disponível',
     id_tipo_animal INT NOT NULL,
-    id_tutor INT,
     id_ong INT,
     data_cadastro DATE DEFAULT CURRENT_DATE,
     FOREIGN KEY (id_tipo_animal) REFERENCES Tipo_Animal(id),
-    FOREIGN KEY (id_tutor) REFERENCES Tutor(id),
     FOREIGN KEY (id_ong) REFERENCES ONG(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
