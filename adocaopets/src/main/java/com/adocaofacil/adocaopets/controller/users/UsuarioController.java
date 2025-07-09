@@ -3,7 +3,6 @@ package com.adocaofacil.adocaopets.controller.users;
 import java.net.URI;
 import java.util.List;
 
-import com.adocaofacil.adocaopets.Redirecao.RedirectResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,7 @@
-package com.adocaofacil.adocaopets.Redirecao;
+package com.adocaofacil.adocaopets.redirecao;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
