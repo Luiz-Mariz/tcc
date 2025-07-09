@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.adocaofacil.adocaopets.model.users.UsuarioModel;
 
+import java.util.Optional;
+
 @Repository
 public interface UsuarioRepository extends JpaRepository <UsuarioModel, Long>{
-    
+    Optional<UsuarioModel> findByEmail(String email);
 }
