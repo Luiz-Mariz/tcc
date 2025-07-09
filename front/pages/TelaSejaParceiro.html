@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
@@ -17,16 +17,27 @@
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center antialiased">
 
-    <header class="bg-purple-800 fixed top-0 left-0 w-full z-50 shadow-lg">
-        <div class="container mx-auto px-4 flex justify-between items-center h-16">
-            <a href="TelaInicial.html" class="text-white font-extrabold text-2xl sm:text-3xl tracking-wide" aria-label="Página inicial Adote BH">
+    <header class="bg-purple-800 opacity-100 p-4 fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-wide" href="TelaInicial.html" aria-label="Página inicial Adote BH">
                 Adote<span class="text-orange-400">BH</span>
             </a>
 
             <nav class="hidden md:flex items-center space-x-6" aria-label="Navegação Principal">
-                <a href="TelaProcAdotar.html" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Quero Adotar</a>
-                <a href="TelaSejaParceiro.html" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
-                <a href="TelaLogin.html" class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow transition duration-300 ease-in-out">
+                <a class="text-gray-300 font-bold hover:text-white" href="TelaProcAdotar.html">Quero Adotar</a>
+                <a class="text-gray-300 font-bold hover:text-white" href="TelaSejaParceiro.html">Seja Nosso Parceiro</a>
+                <div id="user-profile-desktop" class="hidden items-center space-x-2">
+                    <img id="user-avatar-desktop" src="" alt="Avatar do Usuário"
+                        class="w-8 h-8 rounded-full object-cover border-2 border-white">
+                    <span id="user-name-desktop" class="text-white font-medium"></span>
+                    <a href="minha-conta.html"
+                        class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Minha
+                        Conta</a>
+                    <button id="logout-button-desktop"
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out">Sair</button>
+                </div>
+                <a id="login-button-desktop" href="TelaLogin.html"
+                    class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-2 rounded font-medium transition duration-300 ease-in-out">
                     Entrar
                 </a>
             </nav>
@@ -39,9 +50,22 @@
         </div>
 
         <nav id="mobile-menu" class="md:hidden bg-purple-700 pb-4 hidden" aria-label="Navegação Mobile">
-            <a href="index.html#quero-adotar" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero Adotar</a>
-            <a href="seja-nosso-parceiro.html" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
-            <a href="TelaLogin.html" class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded-full text-sm shadow transition duration-300 ease-in-out text-center">
+            <a href="TelaProcAdotar.html" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero Adotar</a>
+            <a href="TelaSejaParceiro.html" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
+            <div id="user-profile-mobile" class="hidden flex flex-col space-y-2 mx-4 mt-2 px-4 py-2">
+                <div class="flex items-center space-x-2">
+                    <img id="user-avatar-mobile" src="" alt="Avatar do Usuário"
+                        class="w-8 h-8 rounded-full object-cover border-2 border-white">
+                    <span id="user-name-mobile" class="text-white font-medium"></span>
+                </div>
+                <a href="minha-conta.html"
+                    class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Minha
+                    Conta</a>
+                <button id="logout-button-mobile"
+                    class="block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out text-center">Sair</button>
+            </div>
+            <a id="login-button-mobile" href="TelaLogin.html"
+                class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded text-sm shadow transition duration-300 ease-in-out text-center">
                 Entrar
             </a>
         </nav>
@@ -205,14 +229,18 @@
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 w-full py-8 mt-auto">
-        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
-            <p class="mb-4 md:mb-0">&copy; 2025 AdoteBH - Todos os direitos reservados.</p>
-            <nav class="flex justify-center space-x-6">
-                <a href="#politica-privacidade" class="hover:text-white transition">Política de Privacidade</a>
-                <a href="#termos-uso" class="hover:text-white transition">Termos de Uso</a>
-                <a href="#contato" class="hover:text-white transition">Contato</a>
-            </nav>
+    <footer class="bg-purple-800 text-white py-6 mt-16 w-full">
+        <div class="container mx-auto text-center">
+            <p class="text-lg font-bold">Adote BH</p>
+            <p class="text-sm">Ajudamos animais a encontrar um lar amoroso. Junte-se a nós!</p>
+            <div class="mt-4 space-x-6">
+                <a href="#sobre-nos" class="text-white hover:text-orange-400">Sobre nós</a>
+                <a href="#termos-uso" class="text-white hover:text-orange-400">Termos de Serviço</a>
+                <a href="#politica-privacidade" class="text-white hover:text-orange-400">Política de Privacidade</a>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm">&copy; 2025 Adote BH. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
     
@@ -220,6 +248,200 @@
         document.getElementById('mobile-menu-button').onclick = function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         };
+
+        // --- Configurações da API (As mesmas das outras telas) ---
+        const USER_PROFILE_API_URL = 'https://api.example.com/api/user/profile'; // <-- Substitua pelo URL real do seu backend para o perfil do usuário!
+        const AUTH_TOKEN_KEY = 'authToken'; // Chave para o token no localStorage
+
+        // --- Funções para o Perfil do Usuário (As mesmas das outras telas) ---
+        async function fetchUserData() {
+            try {
+                const token = localStorage.getItem(AUTH_TOKEN_KEY);
+                if (!token || token === 'seu_token_de_autenticacao_aqui') {
+                    console.log('Nenhum token de autenticação real encontrado ou placeholder. Usuário não logado.');
+                    return null;
+                }
+
+                const response = await fetch(USER_PROFILE_API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    console.error(`Erro ao buscar dados do usuário: ${response.status} ${response.statusText}`);
+                    if (response.status === 401 || response.status === 403) {
+                        Swal.fire({
+                            title: 'Sessão expirada!',
+                            text: 'Por favor, faça login novamente.',
+                            icon: 'warning',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        }).then(() => {
+                            localStorage.removeItem(AUTH_TOKEN_KEY); // Limpa token inválido
+                        });
+                    }
+                    return null;
+                }
+
+                const userData = await response.json();
+                console.log('Dados do usuário recebidos:', userData);
+
+                return {
+                    name: userData.nome || userData.name,
+                    avatar: userData.foto_perfil || userData.profile_url || 'https://via.placeholder.com/150/d3a0e6/FFFFFF?text=User'
+                };
+
+            } catch (error) {
+                console.error('Erro na requisição da API de perfil:', error);
+                Swal.fire({
+                    title: 'Erro de conexão!',
+                    text: 'Não foi possível carregar seu perfil. Tente novamente mais tarde.',
+                    icon: 'error',
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+                return null;
+            }
+        }
+
+        async function updateHeaderProfile() {
+            const userData = await fetchUserData();
+
+            const userProfileDesktop = document.getElementById('user-profile-desktop');
+            const userNameDesktop = document.getElementById('user-name-desktop');
+            const userAvatarDesktop = document.getElementById('user-avatar-desktop');
+            const loginButtonDesktop = document.getElementById('login-button-desktop');
+            
+            let logoutButtonDesktop = document.getElementById('logout-button-desktop');
+            if (!logoutButtonDesktop) {
+                logoutButtonDesktop = document.createElement('button');
+                logoutButtonDesktop.id = 'logout-button-desktop';
+                logoutButtonDesktop.className = 'bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out';
+                logoutButtonDesktop.textContent = 'Sair';
+                logoutButtonDesktop.addEventListener('click', doLogout);
+
+                const navDesktop = loginButtonDesktop.parentElement;
+                const minhaContaLinkDesktop = document.createElement('a');
+                minhaContaLinkDesktop.href = 'minha-conta.html';
+                minhaContaLinkDesktop.className = 'text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out';
+                minhaContaLinkDesktop.textContent = 'Minha Conta';
+                
+                navDesktop.insertBefore(minhaContaLinkDesktop, loginButtonDesktop);
+                navDesktop.insertBefore(logoutButtonDesktop, loginButtonDesktop);
+            }
+
+            const userProfileMobile = document.getElementById('user-profile-mobile');
+            const userNameMobile = document.getElementById('user-name-mobile');
+            const userAvatarMobile = document.getElementById('user-avatar-mobile');
+            const loginButtonMobile = document.getElementById('login-button-mobile');
+            
+            let logoutButtonMobile = document.getElementById('logout-button-mobile');
+            if (!logoutButtonMobile) {
+                logoutButtonMobile = document.createElement('button');
+                logoutButtonMobile.id = 'logout-button-mobile';
+                logoutButtonMobile.className = 'block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out text-center mt-2';
+                logoutButtonMobile.textContent = 'Sair';
+                logoutButtonMobile.addEventListener('click', doLogout);
+
+                const userProfileMobileDiv = document.getElementById('user-profile-mobile');
+                const minhaContaLinkMobile = document.createElement('a');
+                minhaContaLinkMobile.href = 'minha-conta.html';
+                minhaContaLinkMobile.className = 'block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out';
+                minhaContaLinkMobile.textContent = 'Minha Conta';
+
+                if (userProfileMobileDiv) {
+                    userProfileMobileDiv.appendChild(minhaContaLinkMobile);
+                    userProfileMobileDiv.appendChild(logoutButtonMobile);
+                }
+            }
+
+            if (userData && userData.name && userData.avatar) {
+                // Desktop
+                userProfileDesktop.classList.remove('hidden');
+                userProfileDesktop.classList.add('flex');
+                userNameDesktop.textContent = userData.name;
+                userAvatarDesktop.src = userData.avatar;
+                loginButtonDesktop.classList.add('hidden');
+                logoutButtonDesktop.classList.remove('hidden');
+
+                // Mobile
+                userProfileMobile.classList.remove('hidden');
+                userProfileMobile.classList.add('flex', 'flex-col');
+                userNameMobile.textContent = userData.name;
+                userAvatarMobile.src = userData.avatar;
+                loginButtonMobile.classList.add('hidden');
+                logoutButtonMobile.classList.remove('hidden');
+            } else {
+                // Desktop
+                userProfileDesktop.classList.add('hidden');
+                userProfileDesktop.classList.remove('flex');
+                loginButtonDesktop.classList.remove('hidden');
+                logoutButtonDesktop.classList.add('hidden');
+
+                // Mobile
+                userProfileMobile.classList.add('hidden');
+                userProfileMobile.classList.remove('flex', 'flex-col');
+                loginButtonMobile.classList.remove('hidden');
+                logoutButtonMobile.classList.add('hidden');
+            }
+        }
+
+        // Função de Logout (copiada e ajustada da tela "Minha Conta")
+        function doLogout() {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você será desconectado da sua conta.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#8B5CF6',
+                cancelButtonColor: '#EF4444',
+                confirmButtonText: 'Sim, sair!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem(AUTH_TOKEN_KEY); // Remove o token
+                    Swal.fire(
+                        'Desconectado!',
+                        'Você foi desconectado com sucesso.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = 'index.html'; // Redireciona para a página inicial
+                    });
+                }
+            });
+        }
+
+
+        // Chama a função para atualizar o cabeçalho ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderProfile();
+        });
+
+        // Script para preenchimento de CEP
+        document.getElementById('cep').addEventListener('blur', async (event) => {
+            const cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            if (cep.length === 8) {
+                try {
+                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                    const data = await response.json();
+                    if (!data.erro) {
+                        document.getElementById('logradouro').value = data.logradouro;
+                        document.getElementById('bairro').value = data.bairro;
+                        document.getElementById('cidade').value = data.localidade;
+                        document.getElementById('estado').value = data.uf;
+                    } else {
+                        Swal.fire('CEP não encontrado', 'Por favor, verifique o CEP digitado.', 'error');
+                    }
+                } catch (error) {
+                    Swal.fire('Erro', 'Não foi possível buscar o CEP. Tente novamente.', 'error');
+                }
+            }
+        });
     </script>
 </body>
 </html>

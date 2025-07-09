@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Minha Conta - AdoteBH</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center antialiased">
+    <header class="bg-purple-800 fixed top-0 left-0 w-full z-50 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center h-16">
+            <a href="index.html" class="text-white font-extrabold text-2xl sm:text-3xl tracking-wide"
+                aria-label="Página inicial Adote BH">
+                Adote<span class="text-orange-400">BH</span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-6" aria-label="Navegação Principal">
+                <a href="TelaProcAdotar.html"
+                    class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Quero
+                    Adotar</a>
+                <a href="TelaSejaParceiro.html"
+                    class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Seja Nosso
+                    Parceiro</a>
+                <div id="user-profile-desktop" class="hidden items-center space-x-2">
+                    <img id="user-avatar-desktop" src="" alt="Avatar do Usuário"
+                        class="w-8 h-8 rounded-full object-cover border-2 border-white">
+                    <span id="user-name-desktop" class="text-white font-medium"></span>
+                    <a href="TelaMinhaConta.html"
+                        class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out">Minha
+                        Conta</a>
+                    <button id="logout-button-desktop"
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out">Sair</button>
+                </div>
+                <a id="login-button-desktop" href="TelaLogin.html"
+                    class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow transition duration-300 ease-in-out">
+                    Entrar
+                </a>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none"
+                aria-label="Abrir menu de navegação">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="md:hidden bg-purple-700 pb-4 hidden" aria-label="Navegação Mobile">
+            <a href="TelaProcAdotar.html"
+                class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero
+                Adotar</a>
+            <a href="TelaSejaParceiro.html"
+                class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja
+                Nosso Parceiro</a>
+            <div id="user-profile-mobile" class="hidden flex flex-col space-y-2 mx-4 mt-2 px-4 py-2">
+                <div class="flex items-center space-x-2">
+                    <img id="user-avatar-mobile" src="" alt="Avatar do Usuário"
+                        class="w-8 h-8 rounded-full object-cover border-2 border-white">
+                    <span id="user-name-mobile" class="text-white font-medium"></span>
+                </div>
+                <a href="TelaMinhaConta.html"
+                    class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Minha
+                    Conta</a>
+                <button id="logout-button-mobile"
+                    class="block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out text-center">Sair</button>
+            </div>
+            <a id="login-button-mobile" href="TelaLogin.html"
+                class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded-full text-sm shadow transition duration-300 ease-in-out text-center">
+                Entrar
+            </a>
+        </nav>
+    </header>
+
+    <main class="pt-24 pb-8 w-full max-w-4xl px-4 flex-grow">
+        <h1 class="text-4xl font-extrabold text-purple-900 text-center mb-10">Minha Conta</h1>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-purple-800 mb-6 border-b pb-3">Informações do Perfil</h2>
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                <img id="profile-page-avatar" src="" alt="Avatar do Usuário"
+                    class="w-24 h-24 rounded-full object-cover border-4 border-purple-300 shadow-md">
+                <div class="text-center sm:text-left flex-grow">
+                    <p class="text-lg font-semibold text-gray-900">Nome: <span id="profile-page-name"
+                            class="font-normal text-gray-700"></span></p>
+                    <p class="text-lg font-semibold text-gray-900 mt-2">Email: <span id="profile-page-email"
+                            class="font-normal text-gray-700"></span></p>
+                    <button id="edit-profile-button"
+                        class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-full shadow transition duration-300 ease-in-out">
+                        Editar Perfil
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-purple-800 mb-6 border-b pb-3">Meus Pets Divulgados</h2>
+            <div id="my-pets-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <p id="loading-my-pets" class="col-span-full text-center text-gray-600">Carregando seus pets...</p>
+                <p id="no-my-pets" class="col-span-full text-center text-gray-600 hidden">Você ainda não divulgou nenhum pet.</p>
+            </div>
+            <div class="text-center mt-8">
+                <a href="TelaCadastroPet.html"
+                    class="inline-block bg-purple-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-purple-800 transition duration-300 ease-in-out">
+                    Divulgar Novo Pet
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 w-full py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2025 AdoteBH - Todos os direitos reservados.</p>
+            <nav class="flex justify-center space-x-6">
+                <a href="#politica-privacidade" class="hover:text-white transition">Política de Privacidade</a>
+                <a href="#termos-uso" class="hover:text-white transition">Termos de Uso</a>
+                <a href="#contato" class="hover:text-white transition">Contato</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').onclick = function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+
+        // --- Configurações da API (Mantenha consistentes com index.html) ---
+        const USER_PROFILE_API_URL = 'https://api.example.com/api/user/profile'; // URL para o perfil do usuário logado
+        const USER_PETS_API_URL = 'https://api.example.com/api/user/pets'; // URL para pets divulgados pelo usuário logado
+        const AUTH_TOKEN_KEY = 'authToken'; // Chave para o token no localStorage
+
+        // --- Simulação de token de autenticação (APENAS PARA TESTE/DESENVOLVIMENTO) ---
+        // Em um cenário real, você obteria isso de um processo de login.
+        // const AUTH_TOKEN_PLACEHOLDER = 'token_do_usuario_logado_para_teste';
+        // localStorage.setItem(AUTH_TOKEN_KEY, AUTH_TOKEN_PLACEHOLDER); // Para testar, descomente e coloque um token válido
+
+        // --- Funções do Header (copiadas de index.html, com ajustes) ---
+        async function fetchUserData() {
+            try {
+                const token = localStorage.getItem(AUTH_TOKEN_KEY);
+                // Redireciona se não houver token (usuário não logado)
+                if (!token) {
+                    Swal.fire({
+                        title: 'Acesso Negado',
+                        text: 'Você precisa estar logado para acessar esta página.',
+                        icon: 'warning',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    }).then(() => {
+                        window.location.href = 'TelaLogin.html'; // Redireciona para a tela de login
+                    });
+                    return null;
+                }
+
+                const response = await fetch(USER_PROFILE_API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    console.error(`Erro ao buscar dados do usuário: ${response.status} ${response.statusText}`);
+                    if (response.status === 401 || response.status === 403) {
+                        Swal.fire({
+                            title: 'Sessão expirada ou não autorizada!',
+                            text: 'Por favor, faça login novamente.',
+                            icon: 'warning',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        }).then(() => {
+                            localStorage.removeItem(AUTH_TOKEN_KEY); // Limpa o token inválido
+                            window.location.href = 'TelaLogin.html';
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Não foi possível carregar seu perfil.',
+                            icon: 'error',
+                            timer: 4000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        });
+                    }
+                    return null;
+                }
+
+                const userData = await response.json();
+                console.log('Dados do usuário recebidos:', userData);
+
+                // Adapte para os nomes dos campos que sua API retorna
+                return {
+                    name: userData.nome || userData.name || 'Usuário',
+                    email: userData.email || 'Não informado',
+                    avatar: userData.foto_perfil || userData.profile_url || 'https://via.placeholder.com/150/d3a0e6/FFFFFF?text=User' // Fallback
+                };
+
+            } catch (error) {
+                console.error('Erro na requisição da API de perfil:', error);
+                Swal.fire({
+                    title: 'Erro de conexão!',
+                    text: 'Não foi possível carregar seu perfil. Verifique sua conexão.',
+                    icon: 'error',
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+                return null;
+            }
+        }
+
+        async function updateHeaderProfile() {
+            const userData = await fetchUserData(); // Chama fetchUserData para obter os dados do perfil
+
+            const userProfileDesktop = document.getElementById('user-profile-desktop');
+            const userNameDesktop = document.getElementById('user-name-desktop');
+            const userAvatarDesktop = document.getElementById('user-avatar-desktop');
+            const loginButtonDesktop = document.getElementById('login-button-desktop');
+            const logoutButtonDesktop = document.getElementById('logout-button-desktop');
+
+            const userProfileMobile = document.getElementById('user-profile-mobile');
+            const userNameMobile = document.getElementById('user-name-mobile');
+            const userAvatarMobile = document.getElementById('user-avatar-mobile');
+            const loginButtonMobile = document.getElementById('login-button-mobile');
+            const logoutButtonMobile = document.getElementById('logout-button-mobile');
+
+
+            if (userData && userData.name && userData.avatar) {
+                // Atualiza o header (desktop)
+                userProfileDesktop.classList.remove('hidden');
+                userProfileDesktop.classList.add('flex');
+                userNameDesktop.textContent = userData.name;
+                userAvatarDesktop.src = userData.avatar;
+                loginButtonDesktop.classList.add('hidden');
+                logoutButtonDesktop.classList.remove('hidden');
+
+                // Atualiza o header (mobile)
+                userProfileMobile.classList.remove('hidden');
+                userProfileMobile.classList.add('flex');
+                userNameMobile.textContent = userData.name;
+                userAvatarMobile.src = userData.avatar;
+                loginButtonMobile.classList.add('hidden');
+                logoutButtonMobile.classList.remove('hidden');
+
+                // Atualiza o conteúdo da página "Minha Conta"
+                document.getElementById('profile-page-avatar').src = userData.avatar;
+                document.getElementById('profile-page-name').textContent = userData.name;
+                document.getElementById('profile-page-email').textContent = userData.email;
+
+            } else {
+                // Redireciona para login se não houver userData válido (já tratado em fetchUserData)
+                // ou se houver um problema com os dados retornados
+                userProfileDesktop.classList.add('hidden');
+                userProfileDesktop.classList.remove('flex');
+                loginButtonDesktop.classList.remove('hidden');
+                logoutButtonDesktop.classList.add('hidden');
+
+                userProfileMobile.classList.add('hidden');
+                userProfileMobile.classList.remove('flex');
+                loginButtonMobile.classList.remove('hidden');
+                logoutButtonMobile.classList.add('hidden');
+            }
+        }
+
+        // Função de Logout
+        document.getElementById('logout-button-desktop').addEventListener('click', doLogout);
+        document.getElementById('logout-button-mobile').addEventListener('click', doLogout);
+
+        function doLogout() {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você será desconectado da sua conta.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#8B5CF6',
+                cancelButtonColor: '#EF4444',
+                confirmButtonText: 'Sim, sair!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem(AUTH_TOKEN_KEY); // Remove o token
+                    Swal.fire(
+                        'Desconectado!',
+                        'Você foi desconectado com sucesso.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = 'index.html'; // Redireciona para a página inicial
+                    });
+                }
+            });
+        }
+
+        // --- Funções para Meus Pets Divulgados ---
+        const myPetsListDiv = document.getElementById('my-pets-list');
+        const loadingMyPetsMessage = document.getElementById('loading-my-pets');
+        const noMyPetsMessage = document.getElementById('no-my-pets');
+
+        // Função para criar o HTML de um cartão de pet para a área "Minha Conta"
+        function createMyPetCard(pet) {
+            const name = pet.nome || 'Nome Desconhecido';
+            const species = pet.especie || 'Não informada';
+            const size = pet.porte || 'Não informado';
+            const age = pet.idade ? `${pet.idade} Ano${pet.idade > 1 ? 's' : ''}` : 'Idade não informada';
+            const imageUrl = pet.imagem_url || 'https://via.placeholder.com/400x250/d1d5db/FFFFFF?text=Pet+Image';
+
+            return `
+                <article class="bg-white border border-purple-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out overflow-hidden">
+                    <img src="${imageUrl}" alt="Foto de ${name}" class="w-full h-48 object-cover object-center">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-purple-900 mb-1">${name}</h3>
+                        <p class="text-sm text-gray-600 mb-2">${species} • ${size} • ${age}</p>
+                        <div class="flex flex-col sm:flex-row gap-2 mt-4">
+                            <a href="TelaEditarPet.html?id=${pet.id}"
+                                class="flex-grow text-center bg-purple-700 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-800 transition">
+                                Editar
+                            </a>
+                            <button data-pet-id="${pet.id}"
+                                class="delete-pet-button flex-grow text-center bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-600 transition">
+                                Excluir
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Função para renderizar os pets do usuário
+        function renderMyPets(pets) {
+            myPetsListDiv.innerHTML = ''; // Limpa a lista existente
+            loadingMyPetsMessage.classList.add('hidden'); // Esconde a mensagem de carregamento
+
+            if (pets.length === 0) {
+                noMyPetsMessage.classList.remove('hidden');
+            } else {
+                noMyPetsMessage.classList.add('hidden');
+                pets.forEach(pet => {
+                    myPetsListDiv.innerHTML += createMyPetCard(pet);
+                });
+                // Adiciona listeners para os botões de exclusão
+                document.querySelectorAll('.delete-pet-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const petId = this.dataset.petId;
+                        confirmDeletePet(petId);
+                    });
+                });
+            }
+        }
+
+        // Função para buscar os pets do usuário da API
+        async function fetchUserPets() {
+            loadingMyPetsMessage.classList.remove('hidden');
+            noMyPetsMessage.classList.add('hidden');
+
+            try {
+                const token = localStorage.getItem(AUTH_TOKEN_KEY);
+                if (!token) {
+                    console.warn('Token de autenticação não encontrado para buscar pets do usuário.');
+                    loadingMyPetsMessage.classList.add('hidden');
+                    noMyPetsMessage.classList.remove('hidden');
+                    return [];
+                }
+
+                const response = await fetch(USER_PETS_API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // Geralmente, pets do usuário exigem autenticação
+                    }
+                });
+
+                if (!response.ok) {
+                    console.error(`Erro ao buscar pets do usuário: ${response.status} ${response.statusText}`);
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: 'Não foi possível carregar seus pets divulgados.',
+                        icon: 'error',
+                        timer: 4000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                    return [];
+                }
+
+                const pets = await response.json();
+                console.log('Pets do usuário recebidos:', pets);
+                renderMyPets(pets);
+                return pets;
+
+            } catch (error) {
+                console.error('Erro na requisição da API de pets do usuário:', error);
+                Swal.fire({
+                    title: 'Erro de conexão!',
+                    text: 'Não foi possível carregar os dados dos seus pets.',
+                    icon: 'error',
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+                return [];
+            }
+        }
+
+        // Função para confirmar e lidar com a exclusão de um pet
+        async function confirmDeletePet(petId) {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você não poderá reverter a exclusão deste pet!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc2626', // bg-red-600
+                cancelButtonColor: '#6b7280', // gray-500
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await deletePet(petId);
+                }
+            });
+        }
+
+        async function deletePet(petId) {
+            try {
+                const token = localStorage.getItem(AUTH_TOKEN_KEY);
+                if (!token) {
+                    Swal.fire('Erro', 'Você não está autenticado para realizar esta ação.', 'error');
+                    return;
+                }
+
+                // ** Substitua por o URL real do seu backend para deletar pets **
+                // Exemplo: `https://api.example.com/api/pets/${petId}`
+                const response = await fetch(`${PETS_API_URL}/${petId}`, { // Reutilizando PETS_API_URL do index.html
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error(`Erro ao excluir pet ${petId}: ${response.status} ${errorText}`);
+                    Swal.fire(
+                        'Erro!',
+                        `Não foi possível excluir o pet: ${errorText || 'Erro desconhecido'}`,
+                        'error'
+                    );
+                    return;
+                }
+
+                Swal.fire(
+                    'Excluído!',
+                    'O pet foi excluído com sucesso.',
+                    'success'
+                );
+                // Recarrega a lista de pets do usuário após a exclusão
+                fetchUserPets();
+
+            } catch (error) {
+                console.error('Erro na requisição de exclusão de pet:', error);
+                Swal.fire(
+                    'Erro de Conexão!',
+                    'Não foi possível conectar ao servidor para excluir o pet.',
+                    'error'
+                );
+            }
+        }
+
+        // --- Funções de Navegação para a Home (Index.html) ---
+        // Certifique-se de que a navegação do header aponte para index.html
+        document.querySelector('header a[href="index.html"]').addEventListener('click', (event) => {
+            event.preventDefault(); // Evita a navegação imediata
+            window.location.href = 'index.html'; // Navega para a página inicial
+        });
+
+        // Event listener para o botão "Editar Perfil"
+        document.getElementById('edit-profile-button').addEventListener('click', () => {
+            Swal.fire({
+                title: 'Funcionalidade em desenvolvimento!',
+                text: 'A tela de edição de perfil ainda não está disponível.',
+                icon: 'info',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+            // Em uma aplicação real, você redirecionaria para:
+            // window.location.href = 'TelaEditarPerfil.html';
+        });
+
+        // Chama as funções ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderProfile(); // Carrega o perfil do usuário no header e na página
+            fetchUserPets();      // Carrega os pets divulgados pelo usuário
+        });
+    </script>
+</body>
+
+</html>

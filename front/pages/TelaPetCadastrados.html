@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pets Cadastrados - AdoteBH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #a78bfa;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        /* Classes para a sobreposição da sidebar em telas pequenas */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            /* Abaixo da sidebar */
+            display: none;
+            /* Inicia oculto */
+        }
+
+        .overlay.active {
+            display: block;
+            /* Mostra quando a sidebar está ativa */
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 flex min-h-screen">
+    <div class="overlay" id="sidebar-overlay"></div>
+
+    <aside
+        class="w-64 bg-white shadow-xl fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
+        id="sidebar">
+        <div class="flex justify-between items-center mb-8">
+            <a href="TelaInicial.html" class="flex items-center gap-2">
+                <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span></h2>
+            </a>
+            <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label="Fechar menu lateral">
+                <i class="las la-times text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="flex items-center gap-4 mb-8 p-3 bg-purple-50 rounded-lg" id="user-profile-info">
+            <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
+            <div>
+                <strong class="block text-gray-900 text-lg">Carregando...</strong>
+            </div>
+        </div>
+
+        <nav class="flex-grow">
+            <ul class="space-y-2">
+                <li>
+                    <a href="TelaCadastroPet.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="fas fa-plus text-xl"></i> Cadastrar Pet
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaPetCadastrados.html"
+                        class="flex items-center gap-3 p-3 bg-purple-600 text-white rounded-lg transition duration-300 font-medium"
+                        aria-current="page">
+                        <i class="las la-paw text-xl"></i> Pets Cadastrados
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaAgendaVisita.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-calendar text-xl"></i> Agenda de Visitas
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaMinhaConta.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-user text-xl"></i> Minha Conta
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mt-8 pt-4 border-t border-gray-200">
+            <a href="TelaLogin.html"
+                class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium">
+                <i class="las la-sign-out-alt text-xl"></i> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="flex-1 md:ml-64 p-6 md:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <button id="sidebar-open-button"
+                    class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
+                    aria-label="Abrir menu lateral">
+                    <i class="las la-bars text-3xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-4xl font-bold text-purple-800">Pets Cadastrados</h1>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="pets-grid">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-5 text-center">
+                    <i class="las la-spinner la-spin text-4xl text-purple-500 mb-4"></i>
+                    <p class="text-gray-600">Carregando pets...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOpenButton = document.getElementById('sidebar-open-button');
+        const sidebarCloseButton = document.getElementById('sidebar-close-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const userProfileInfo = document.getElementById('user-profile-info'); // Novo ID para a div do perfil
+        const petsGrid = document.getElementById('pets-grid'); // ID para a grid dos pets
+
+        // ** Importante: Configure a URL base da sua API aqui! **
+        const API_BASE_URL = 'http://localhost:3000/api'; // <--- Altere esta linha!
+
+        // Função para abrir a sidebar
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Função para fechar a sidebar
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event Listeners para a Sidebar
+        sidebarOpenButton.addEventListener('click', openSidebar);
+        sidebarCloseButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Observa mudanças no tamanho da tela para ajustar a sidebar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                if (!sidebar.classList.contains('translate-x-0')) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+
+        // Garante que a sidebar esteja visível em desktop ao carregar a página
+        if (window.innerWidth >= 768) {
+            sidebar.classList.remove('-translate-x-full');
+        }
+
+        /**
+         * Busca os dados do perfil do usuário da API e preenche a seção.
+         */
+        async function fetchUserProfile() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/user/profile`); // Endpoint para buscar o perfil do usuário
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar perfil: ${response.status} ${response.statusText}`);
+                }
+                const user = await response.json(); // Espera um objeto JSON com user.name e user.profileImage
+
+                // Preenche a div do perfil com os dados da API
+                userProfileInfo.innerHTML = `
+                    <img src="${user.profileImage || 'https://via.placeholder.com/40'}"
+                        alt="Foto de perfil do usuário"
+                        class="w-10 h-10 rounded-full object-cover border-2 border-purple-300"
+                    />
+                    <div>
+                        <strong class="block text-gray-900 text-lg">${user.name || 'Usuário'}</strong>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Erro ao carregar dados do usuário:", error);
+                // Exibir um estado de erro ou fallback
+                userProfileInfo.innerHTML = `
+                    <img src="https://via.placeholder.com/40"
+                        alt="Erro ao carregar foto"
+                        class="w-10 h-10 rounded-full object-cover border-2 border-red-300"
+                    />
+                    <div>
+                        <strong class="block text-red-600 text-lg">Erro ao carregar perfil</strong>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Renderiza os cards dos pets.
+         * @param {Array<Object>} pets - Array de objetos de pets.
+         */
+        function renderPets(pets) {
+            petsGrid.innerHTML = ''; // Limpa o conteúdo existente
+
+            if (pets.length === 0) {
+                petsGrid.innerHTML = `
+                    <div class="col-span-full bg-white p-8 rounded-2xl shadow-lg text-center text-gray-600">
+                        <i class="las la-exclamation-circle text-6xl text-yellow-500 mb-4"></i>
+                        <p class="text-xl font-semibold">Nenhum pet cadastrado ainda!</p>
+                        <p class="mt-2">Use a opção "Cadastrar Pet" para adicionar novos animais.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            pets.forEach(pet => {
+                const card = document.createElement('div');
+                card.classList.add('bg-white', 'rounded-2xl', 'shadow-lg', 'overflow-hidden', 'border', 'border-gray-100', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300', 'ease-in-out');
+
+                // Monta as tags de características (Vacinado, Castrado, etc.)
+                const tagsHtml = pet.characteristics ? pet.characteristics.map(tag => {
+                    let bgColor = 'bg-gray-100';
+                    let textColor = 'text-gray-800';
+                    if (tag.toLowerCase().includes('vacinado') || tag.toLowerCase().includes('castrado') || tag.toLowerCase().includes('vermifugado')) {
+                        bgColor = 'bg-green-100';
+                        textColor = 'text-green-800';
+                    } else if (tag.toLowerCase().includes('brincalhão') || tag.toLowerCase().includes('sociável') || tag.toLowerCase().includes('energético')) {
+                        bgColor = 'bg-blue-100';
+                        textColor = 'text-blue-800';
+                    } else if (tag.toLowerCase().includes('calmo') || tag.toLowerCase().includes('timido')) {
+                        bgColor = 'bg-yellow-100';
+                        textColor = 'text-yellow-800';
+                    }
+                    return `<span class="${bgColor} ${textColor} text-xs font-semibold px-2.5 py-0.5 rounded-full">${tag}</span>`;
+                }).join('') : '';
+
+                card.innerHTML = `
+                    <img class="w-full h-48 object-cover" src="${pet.image || 'https://via.placeholder.com/300'}" alt="Foto do Pet ${pet.name}">
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-purple-700 mb-2">${pet.name || 'Nome do Pet'} <span class="text-sm font-normal text-gray-500">- ${pet.breed || 'Raça Desconhecida'}</span></h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            <span class="mr-2"><i class="las la-calendar"></i> ${pet.age || 'Idade Desconhecida'}</span>
+                            <span class="mr-2"><i class="las la-ruler-horizontal"></i> ${pet.size || 'Tamanho Desconhecido'}</span>
+                            <span><i class="las la-${pet.gender === 'Macho' ? 'mars' : 'venus'}"></i> ${pet.gender || 'Gênero Desconhecido'}</span>
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${tagsHtml}
+                        </div>
+                        <a href="#" class="block bg-purple-600 text-white text-center py-2 rounded-full hover:bg-purple-700 transition duration-300">
+                            Ver Detalhes <i class="las la-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                `;
+                petsGrid.appendChild(card);
+            });
+        }
+
+        /**
+         * Busca os pets cadastrados da API.
+         */
+        async function fetchPets() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/pets`); // Endpoint para buscar os pets
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição de pets: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                renderPets(data);
+
+            } catch (error) {
+                console.error("Erro ao buscar pets:", error);
+                petsGrid.innerHTML = `
+                    <div class="col-span-full bg-red-50 p-8 rounded-2xl shadow-lg text-center text-red-700 border border-red-200">
+                        <i class="las la-exclamation-triangle text-6xl mb-4"></i>
+                        <p class="text-xl font-semibold">Erro ao carregar pets!</p>
+                        <p class="mt-2">Não foi possível buscar os pets. Verifique a conexão com a API.</p>
+                        <p class="text-sm mt-1">Detalhes: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+
+        // Carrega o perfil do usuário e os pets quando a página é totalmente carregada
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUserProfile(); // Chamada para carregar o perfil do usuário
+            fetchPets(); // Chamada para carregar os pets
+        });
+    </script>
+</body>
+
+</html>

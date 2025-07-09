@@ -1,74 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AdoteBH - Adicionar Novo Pet</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
         }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #e2e8f0;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb {
-            background: #888;
+            background: #a78bfa;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #8b5cf6;
+        }
+
+        /* Estilos para focar nos inputs */
+        .focus-ring-purple-500:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+            border-color: #8b5cf6;
+        }
+
+        /* Classes para a sobreposição da sidebar em telas pequenas */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            /* Abaixo da sidebar */
+            display: none;
+            /* Inicia oculto */
+        }
+
+        .overlay.active {
+            display: block;
+            /* Mostra quando a sidebar está ativa */
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 flex min-h-screen">
-<!--Html e CSS-->
-    <aside class="w-64 bg-white shadow-lg fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
+
+<body class="text-gray-800 flex min-h-screen">
+    <div class="overlay" id="sidebar-overlay"></div>
+
+    <aside
+        class="w-64 bg-white shadow-xl fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
+        id="sidebar">
         <div class="flex justify-between items-center mb-8">
-            <h2 class="text-3xl font-extrabold text-purple-800">Adote<span class="text-orange-400">BH</span></h2>
-            <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Fechar menu lateral">
+            <a href="TelaInicial.html" class="flex items-center gap-2">
+                <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span>
+                </h2>
+            </a>
+            <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label="Fechar menu lateral">
                 <i class="las la-times text-2xl"></i>
             </button>
         </div>
 
-        <div class="flex items-center gap-4 mb-8 p-3 bg-gray-50 rounded-lg">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cfd46db1?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                 alt="Foto de perfil do usuário"
-                 class="w-10 h-10 rounded-full object-cover border-2 border-purple-400"
-            />
+        <div class="flex items-center gap-4 mb-8 p-3 bg-purple-50 rounded-lg" id="user-profile-info">
+            <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
             <div>
-                <strong class="block text-gray-900 text-lg">Ralph Anderson</strong>
-                <small class="text-gray-600 text-sm">ID: 1029-1234-235</small>
+                <strong class="block text-gray-900 text-lg">Carregando...</strong>
             </div>
         </div>
 
         <nav class="flex-grow">
             <ul class="space-y-2">
-
                 <li>
-                    <a href="#analytics" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-700 hover:text-white rounded-lg transition duration-300">
-                        <i class="las la-chart-line text-xl"></i> Cadastrar Pet
+                    <a href="TelaCadastroPet.html"
+                        class="flex items-center gap-3 p-3 bg-purple-600 text-white rounded-lg transition duration-300 font-medium"
+                        aria-current="page">
+                        <i class="fas fa-plus text-xl"></i> Cadastrar Pet
                     </a>
                 </li>
                 <li>
-                    <a href="#pets-cadastrados" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-700 hover:text-white rounded-lg transition duration-300">
-                        <i class="las la-video text-xl"></i> Pets Cadastrados
+                    <a href="TelaPetCadastrados.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-paw text-xl"></i> Pets Cadastrados
                     </a>
                 </li>
                 <li>
-                    <a href="#agenda" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-700 hover:text-white rounded-lg transition duration-300">
+                    <a href="TelaAgendaVisita.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
                         <i class="las la-calendar text-xl"></i> Agenda de Visitas
                     </a>
                 </li>
                 <li>
-                    <a href="#minha-conta" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-700 hover:text-white rounded-lg transition duration-300">
+                    <a href="TelaMinhaConta.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
                         <i class="las la-user text-xl"></i> Minha Conta
                     </a>
                 </li>
@@ -76,7 +121,8 @@
         </nav>
 
         <div class="mt-8 pt-4 border-t border-gray-200">
-            <a href="#" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300">
+            <a href="TelaLogin.html"
+                class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium">
                 <i class="las la-sign-out-alt text-xl"></i> Sair
             </a>
         </div>
@@ -85,43 +131,51 @@
     <div class="flex-1 md:ml-64 p-6 md:p-8">
         <header class="flex justify-between items-center mb-8">
             <div class="flex items-center gap-4">
-                <button id="sidebar-open-button" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Abrir menu lateral">
+                <button id="sidebar-open-button"
+                    class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
+                    aria-label="Abrir menu lateral">
                     <i class="las la-bars text-3xl"></i>
                 </button>
                 <div>
-                    <h1 class="text-4xl font-bold text-purple-900">Adicionar Novo Pet</h1>
-                    <p class="text-lg text-gray-600 mt-1">Compartilhe um novo amiguinho para adoção! 🐾</p>
+                    <h1 class="text-4xl font-bold text-purple-800">Adicionar Novo Pet</h1>
+                    <p class="text-lg text-gray-600 mt-1">Compartilhe um novo amiguinho para adoção! <span
+                            class="text-orange-400">🐾</span></p>
                 </div>
             </div>
         </header>
 
         <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto">
-            <h2 class="text-2xl font-semibold text-purple-800 mb-6">Informações do Pet</h2>
+            <h2 class="text-2xl font-semibold text-purple-700 mb-6">Informações do Pet</h2>
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome do Pet</label>
                         <input type="text" id="nome" name="nome" placeholder="Ex: Max, Luna, Biscoito"
-                               class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm" required>
+                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
+                            required>
                     </div>
                     <div>
                         <label for="especie" class="block text-sm font-medium text-gray-700 mb-1">Espécie</label>
                         <select id="especie" name="especie"
-                                class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm" required>
+                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
+                            required>
                             <option value="">Selecione a Espécie</option>
                             <option value="cachorro">Cachorro</option>
                             <option value="gato">Gato</option>
                         </select>
                     </div>
                     <div>
-                        <label for="raca" class="block text-sm font-medium text-gray-700 mb-1">Raça (Opcional)</label>
+                        <label for="raca" class="block text-sm font-medium text-gray-700 mb-1">Raça
+                            (Opcional)</label>
                         <input type="text" id="raca" name="raca" placeholder="Ex: Labrador, Siamês, SRD"
-                               class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm">
                     </div>
                     <div>
-                        <label for="idade" class="block text-sm font-medium text-gray-700 mb-1">Idade Aproximada</label>
+                        <label for="idade" class="block text-sm font-medium text-gray-700 mb-1">Idade
+                            Aproximada</label>
                         <select id="idade" name="idade"
-                                class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm" required>
+                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
+                            required>
                             <option value="">Selecione a Idade</option>
                             <option value="filhote">Filhote (0-1 ano)</option>
                             <option value="jovem">Jovem (1-3 anos)</option>
@@ -132,7 +186,8 @@
                     <div>
                         <label for="porte" class="block text-sm font-medium text-gray-700 mb-1">Porte</label>
                         <select id="porte" name="porte"
-                                class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm" required>
+                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
+                            required>
                             <option value="">Selecione o Porte</option>
                             <option value="pequeno">Pequeno</option>
                             <option value="medio">Médio</option>
@@ -142,7 +197,8 @@
                     <div>
                         <label for="sexo" class="block text-sm font-medium text-gray-700 mb-1">Sexo</label>
                         <select id="sexo" name="sexo"
-                                class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm" required>
+                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
+                            required>
                             <option value="">Selecione o Sexo</option>
                             <option value="macho">Macho</option>
                             <option value="femea">Fêmea</option>
@@ -152,16 +208,18 @@
 
                 <div class="mb-6">
                     <label for="fotos" class="block text-sm font-medium text-gray-700 mb-1">Fotos do Pet</label>
-                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg"
-                         ondragover="event.preventDefault(); this.classList.add('border-purple-500');"
-                         ondragleave="this.classList.remove('border-purple-500');"
-                         ondrop="event.preventDefault(); this.classList.remove('border-purple-500'); handleFiles(event.dataTransfer.files);">
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-purple-300 border-dashed rounded-lg"
+                        ondragover="event.preventDefault(); this.classList.add('border-purple-500');"
+                        ondragleave="this.classList.remove('border-purple-500');"
+                        ondrop="event.preventDefault(); this.classList.remove('border-purple-500'); handleFiles(event.dataTransfer.files);">
                         <div class="text-center">
-                            <i class="las la-camera text-4xl text-gray-400"></i>
+                            <i class="las la-paw text-5xl text-purple-400"></i>
                             <p class="mt-1 text-sm text-gray-600">
-                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-purple-500">
+                                <label for="file-upload"
+                                    class="relative cursor-pointer bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-purple-500">
                                     <span>Clique para fazer upload</span>
-                                    <input id="file-upload" name="file-upload[]" type="file" class="sr-only" multiple accept="image/*" onchange="handleFiles(this.files)">
+                                    <input id="file-upload" name="file-upload[]" type="file" class="sr-only"
+                                        multiple accept="image/*" onchange="handleFiles(this.files)">
                                 </label>
                                 ou arraste e solte
                             </p>
@@ -169,13 +227,15 @@
                         </div>
                     </div>
                     <div id="file-preview" class="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
-                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-6">
-                    <label for="descricao" class="block text-sm font-medium text-gray-700 mb-1">Descrição e Personalidade</label>
-                    <textarea id="descricao" name="descricao" rows="4" placeholder="Conte-nos sobre a personalidade do pet, hábitos, necessidades especiais, etc."
-                              class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"></textarea>
+                    <label for="descricao" class="block text-sm font-medium text-gray-700 mb-1">Descrição e
+                        Personalidade</label>
+                    <textarea id="descricao" name="descricao" rows="4"
+                        placeholder="Conte-nos sobre a personalidade do pet, hábitos, necessidades especiais, etc."
+                        class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"></textarea>
                 </div>
 
                 <div class="mb-6">
@@ -183,17 +243,17 @@
                     <div class="flex items-center space-x-6">
                         <div class="flex items-center">
                             <input id="vacinado" name="saude-vacinado" type="checkbox"
-                                   class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded">
+                                class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded">
                             <label for="vacinado" class="ml-2 block text-sm text-gray-700">Vacinado</label>
                         </div>
                         <div class="flex items-center">
                             <input id="castrado" name="saude-castrado" type="checkbox"
-                                   class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded">
+                                class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded">
                             <label for="castrado" class="ml-2 block text-sm text-gray-700">Castrado(a)</label>
                         </div>
                         <div class="flex items-center">
                             <input id="vermifugado" name="saude-vermifugado" type="checkbox"
-                                   class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded">
+                                class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded">
                             <label for="vermifugado" class="ml-2 block text-sm text-gray-700">Vermifugado</label>
                         </div>
                     </div>
@@ -201,7 +261,7 @@
 
                 <div class="mt-8 flex justify-end">
                     <button type="submit"
-                            class="bg-purple-700 text-white px-8 py-3 rounded-full shadow-lg hover:bg-purple-800 transition duration-300 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                        class="bg-purple-700 text-white px-8 py-3 rounded-full shadow-lg hover:bg-purple-800 transition duration-300 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                         <i class="las la-paw mr-2"></i> Cadastrar Pet
                     </button>
                 </div>
@@ -213,24 +273,87 @@
         const sidebar = document.getElementById('sidebar');
         const sidebarOpenButton = document.getElementById('sidebar-open-button');
         const sidebarCloseButton = document.getElementById('sidebar-close-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const userProfileInfo = document.getElementById('user-profile-info');
         const fileUploadInput = document.getElementById('file-upload');
         const filePreviewContainer = document.getElementById('file-preview');
 
-        // Sidebar Toggle
-        sidebarOpenButton.addEventListener('click', () => {
+        // ** Importante: Configure a URL base da sua API aqui! **
+        const API_BASE_URL = 'http://localhost:3000/api'; // <--- Altere esta linha!
+
+        // Função para abrir a sidebar
+        function openSidebar() {
             sidebar.classList.remove('-translate-x-full');
-        });
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-        sidebarCloseButton.addEventListener('click', () => {
+        // Função para fechar a sidebar
+        function closeSidebar() {
             sidebar.classList.add('-translate-x-full');
-        });
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (event) => {
-            if (window.innerWidth < 768 && !sidebar.contains(event.target) && !sidebarOpenButton.contains(event.target)) {
-                sidebar.classList.add('-translate-x-full');
+        // Event Listeners para a Sidebar
+        sidebarOpenButton.addEventListener('click', openSidebar);
+        sidebarCloseButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Observa mudanças no tamanho da tela para ajustar a sidebar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                if (!sidebar.classList.contains('translate-x-0')) {
+                    sidebar.classList.add('-translate-x-full');
+                }
             }
         });
+
+        // Garante que a sidebar esteja visível em desktop ao carregar a página
+        if (window.innerWidth >= 768) {
+            sidebar.classList.remove('-translate-x-full');
+        }
+
+        /**
+         * Busca os dados do perfil do usuário da API e preenche a seção.
+         */
+        async function fetchUserProfile() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/user/profile`); // Endpoint para buscar o perfil do usuário
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar perfil: ${response.status} ${response.statusText}`);
+                }
+                const user = await response.json(); // Espera um objeto JSON com user.name e user.profileImage
+
+                // Preenche a div do perfil com os dados da API
+                userProfileInfo.innerHTML = `
+                    <img src="${user.profileImage || 'https://via.placeholder.com/40'}"
+                        alt="Foto de perfil do usuário"
+                        class="w-10 h-10 rounded-full object-cover border-2 border-purple-300"
+                    />
+                    <div>
+                        <strong class="block text-gray-900 text-lg">${user.name || 'Usuário'}</strong>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Erro ao carregar dados do usuário:", error);
+                // Exibir um estado de erro ou fallback
+                userProfileInfo.innerHTML = `
+                    <img src="https://via.placeholder.com/40"
+                        alt="Erro ao carregar foto"
+                        class="w-10 h-10 rounded-full object-cover border-2 border-red-300"
+                    />
+                    <div>
+                        <strong class="block text-red-600 text-lg">Erro ao carregar perfil</strong>
+                    </div>
+                `;
+            }
+        }
 
         // Image Preview Functionality
         function handleFiles(files) {
@@ -266,6 +389,12 @@
                 }
             });
         }
+
+        // Carrega o perfil do usuário quando a página é totalmente carregada
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUserProfile(); // Chamada para carregar o perfil do usuário
+        });
     </script>
 </body>
+
 </html>
