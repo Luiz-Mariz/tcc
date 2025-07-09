@@ -40,7 +40,7 @@ public class UsuarioModel {
     private String email;
 
     @Column(name = "senha_hash", nullable = false)
-    private String senhaHash;
+    private String senha_hash;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_usuario", nullable =  false)

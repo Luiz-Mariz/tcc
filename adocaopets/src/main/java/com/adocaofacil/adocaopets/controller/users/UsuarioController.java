@@ -59,27 +59,18 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UsuarioModel usuarioRequest) {
+    public String login(@RequestParam String email, @RequestParam String senha){
+
         try {
-            String result = service.login(usuarioRequest);
+            boolean autentificando = service.verificar(email, senha);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Access-Control-Allow-Origin", "*");
-
-            if (result.contains("dashboard")) {
-                return ResponseEntity.status(HttpStatus.FOUND)
-                        .headers(headers)
-                        .location(URI.create(result))
-                        .build();
+            if (autentificando) {
+                return "Login bem-sucedido";
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .headers(headers)
-                        .body(result);
+                return "Email ou senha invalidas";
             }
-
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro no processo de login: " + e.getMessage());
+            return "Erro " + e.getMessage();
         }
     }
 }

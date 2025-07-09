@@ -29,6 +29,13 @@ public class UsuarioService {
     }
 
     public UsuarioModel salvar(UsuarioModel usuarioModel){
+        if (usuarioModel.getSenha_hash() != null && !usuarioModel.getSenha_hash().isEmpty()) {
+            String senhaHash = passwordEncoder.encode(usuarioModel.getSenha_hash());
+            usuarioModel.setSenha_hash(senhaHash);
+        }
+        else {
+            throw new IllegalArgumentException("A senha não pode ser nula ou vazia");
+        }
         return repository.save(usuarioModel);
     }
 
@@ -36,37 +43,21 @@ public class UsuarioService {
          repository.deleteById(id);
     }
 
-    public String login(UsuarioModel usuarioRequest) {
-        // Alteração: Remover a busca por 'username' e buscar apenas por 'email'
-        Optional<UsuarioModel> usuario = repository.findByEmail(usuarioRequest.getEmail()); // Busca apenas por email
+    public boolean verificar(String email, String senhaInformada) {
 
-        if (usuario.isPresent()) {
-            UsuarioModel usuarioFound = usuario.get();
+        try {
+            Optional<UsuarioModel> usuarioOptional = repository.findByEmail(email);
 
-            if (passwordEncoder.matches(usuarioRequest.getSenhaHash(), usuarioFound.getSenhaHash())) {
-                TipoUsuario tipoUsuario = usuarioFound.getTipoUsuario();
-                String redirectUrl = "";
+            if (usuarioOptional.isPresent()) {
+                UsuarioModel usuarioModel = usuarioOptional.get();
 
-                switch (tipoUsuario) {
-                    case ADMIN:
-                        redirectUrl = "/admin-dashboard";
-                        break;
-                    case TUTOR:
-                        redirectUrl = "/tutor-dashboard";
-                        break;
-                    case ONG:
-                        redirectUrl = "/ong-dashboard";
-                        break;
-                    default:
-                        return "Tipo de usuário desconhecido.";
-                }
-
-                return redirectUrl;
-            } else {
-                return "Senha incorreta.";
+                return passwordEncoder.matches(senhaInformada, usuarioModel.getSenha_hash());
             }
-        } else {
-            return "Usuário não encontrado.";
+            return false;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
