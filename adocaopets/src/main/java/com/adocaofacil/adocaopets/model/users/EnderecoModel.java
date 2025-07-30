@@ -41,7 +41,7 @@ public class EnderecoModel {
     @Column(name = "estado", nullable = false )
     private String estado;
 
-    @Column(name = "complemento", nullable = false)
+    @Column(name = "complemento")
     private String complemento;
 
 }

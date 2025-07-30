@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tutor")
+@CrossOrigin("*")
 public class TutorController {
 
     @Autowired
@@ -31,6 +32,7 @@ public class TutorController {
     @PostMapping
     public TutorModel salvar(@RequestBody TutorModel tutorModel){
         return service.save(tutorModel);
+
     }
 
     @PutMapping("/{id}")

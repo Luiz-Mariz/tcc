@@ -1,21 +1,14 @@
 package com.adocaofacil.adocaopets.model.users;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.adocaofacil.adocaopets.enumClasses.TipoUsuario;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,9 +26,6 @@ public class UsuarioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome", nullable = false)
-    private String nome;
-
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -44,7 +34,7 @@ public class UsuarioModel {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_usuario", nullable =  false)
-    private TipoUsuario TipoUsuario;
+    private TipoUsuario tipoUsuario;
 
     @Column(nullable = false)
     private Boolean ativo = true;
@@ -56,6 +46,11 @@ public class UsuarioModel {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updated_at;
-    
 
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario != null ? TipoUsuario.valueOf(tipoUsuario.name().toUpperCase()) : null;
+    }
+
+    @OneToMany(mappedBy = "usuario")
+    private List<TutorModel> tutores;
 }

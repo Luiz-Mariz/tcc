@@ -31,10 +31,10 @@
         <!-- Formulário de Login -->
         <div class="mx-auto sm:mx-20 p-4 w-full max-w-md min-h-[500px] bg-white shadow-lg rounded-lg">
           <h2 class="font-bold mb-4 text-2xl sm:text-3xl text-left">Boas-vindas ao Adote BH 🐶😻</h2>
-          <form id="formCadastro" class="bg-transparent shadow-md rounded p-4" onsubmit="cadastro()">
+          <form id="formCadastro" class="bg-transparent shadow-md rounded p-4" onsubmit="cadastro(event)">
             <div class="mb-4">
               <label for="Nome" class="block text-gray-700 font-bold mb-2">Nome</label>
-              <input type="text" id="Nome" class="w-full px-3 py-2 border rounded" required>
+              <input type="text" id="nome" class="w-full px-3 py-2 border rounded" required>
             </div>
             <div class="mb-4">
               <label for="cpf" class="block text-gray-700 font-bold mb-2">CPF</label>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="mb-4">
-              <label for="confirmar senha" class="block text-gray-700 font-bold mb-2">Confirmar Senha</label>
+              <label for="confirmarSenha" class="block text-gray-700 font-bold mb-2">Confirmar Senha</label>
               <input type="password" id="confirmarSenha" class="w-full px-3 py-2 border rounded" required>
             </div>
             <div class="flex justify-center mt-4">
@@ -88,6 +88,6 @@
     </footer>
 
     <!-- mudar para fazer o js -->
-    <script src="./assents/js/index.js"></script>
+    <script src="/front/assents/CadastroTutor.js"></script>
   </body>
 </html>
