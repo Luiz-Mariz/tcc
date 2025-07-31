@@ -23,10 +23,10 @@ CREATE TABLE Endereco (
 -- Tabela de usuários (login)
 CREATE TABLE Usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100),
     email VARCHAR(100) UNIQUE NOT NULL,
     senha_hash VARCHAR(255) NOT NULL,
     tipo_usuario ENUM('tutor', 'ong', 'admin') NOT NULL,
+    foto_url VARCHAR(100),
     ativo BOOLEAN DEFAULT TRUE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

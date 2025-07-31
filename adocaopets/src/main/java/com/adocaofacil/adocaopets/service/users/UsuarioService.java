@@ -13,7 +13,7 @@ import com.adocaofacil.adocaopets.repository.users.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-    
+
     @Autowired
     private UsuarioRepository repository;
 
@@ -43,22 +43,21 @@ public class UsuarioService {
          repository.deleteById(id);
     }
 
-    public boolean verificar(String email, String senhaInformada) {
+    public Optional<UsuarioModel> verificarCredenciais(String email, String senha) {
 
-        try {
-            Optional<UsuarioModel> usuarioOptional = repository.findByEmail(email);
+        Optional<UsuarioModel> usuarioOptional = repository.findByEmail(email);
 
-            if (usuarioOptional.isPresent()) {
-                UsuarioModel usuarioModel = usuarioOptional.get();
+        if (usuarioOptional.isPresent()) {
+            UsuarioModel usuario = usuarioOptional.get();
 
-                return passwordEncoder.matches(senhaInformada, usuarioModel.getSenha_hash());
+
+            if (passwordEncoder.matches(senha, usuario.getSenha_hash())) {
+                return Optional.of(usuario);
             }
-            return false;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
+
+        return Optional.empty();
     }
+
 }
 

@@ -36,6 +36,9 @@ public class UsuarioModel {
     @Column(name = "tipo_usuario", nullable =  false)
     private TipoUsuario tipoUsuario;
 
+    @Column(name = "foto_url")
+    private String foto_url;
+
     @Column(nullable = false)
     private Boolean ativo = true;
 

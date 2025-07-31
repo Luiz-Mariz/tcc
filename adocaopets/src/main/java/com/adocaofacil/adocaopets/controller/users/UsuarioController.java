@@ -7,7 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -56,17 +59,30 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String senha){
+    public ResponseEntity<?> login(@RequestBody UsuarioModel usuarioModel) {
         try {
-            boolean autentificando = service.verificar(email, senha);
+            Optional<UsuarioModel> usuarioOptional = service.verificarCredenciais(usuarioModel.getEmail(), usuarioModel.getSenha_hash());
 
-            if (autentificando) {
-                return "Login bem-sucedido";
+            if (usuarioOptional.isPresent()) {
+                UsuarioModel usuario = usuarioOptional.get();
+
+                Map<String, Object> response = new HashMap<>();
+                response.put("id", usuario.getId());
+                response.put("email", usuario.getEmail());
+                response.put("tipoUsuario", usuario.getTipoUsuario().name().toLowerCase()); // Coloca o tipo de usuário em minúsculas
+                response.put("ativo", usuario.getAtivo());
+                response.put("created_at", usuario.getCreated_at());
+                response.put("updated_at", usuario.getUpdated_at());
+
+                return ResponseEntity.ok(response);
             } else {
-                return "Email ou senha inválidos";
+                return ResponseEntity.status(401).body("Email ou senha inválidos");
             }
         } catch (Exception e) {
-            return "Erro " + e.getMessage();
+            return ResponseEntity.status(500).body("Erro ao autenticar: " + e.getMessage());
         }
     }
+
+
+
 }

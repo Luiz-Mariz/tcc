@@ -40,8 +40,8 @@ public class AnimalModel {
     private String descricao;
 
     @Lob
-    @Column(name = "foto")
-    private byte[] foto;
+    @Column(name = "foto_url")
+    private String foto_url;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
