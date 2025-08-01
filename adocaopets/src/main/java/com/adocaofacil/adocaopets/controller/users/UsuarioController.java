@@ -71,6 +71,7 @@ public class UsuarioController {
                 response.put("email", usuario.getEmail());
                 response.put("tipoUsuario", usuario.getTipoUsuario().name().toLowerCase()); // Coloca o tipo de usuário em minúsculas
                 response.put("ativo", usuario.getAtivo());
+                response.put("foto_url", usuario.getFoto_url());
                 response.put("created_at", usuario.getCreated_at());
                 response.put("updated_at", usuario.getUpdated_at());
 

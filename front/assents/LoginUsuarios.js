@@ -30,6 +30,7 @@ formLogin.addEventListener('submit', (e) => {
         // Verifica se a resposta contém a chave tipoUsuario
         if (data && data.tipoUsuario) {
             // Armazena os dados no localStorage
+            localStorage.setItem('foto_url', data.foto_url)
             localStorage.setItem('tipoUsuario', data.tipoUsuario);
             localStorage.setItem('usuarioId', data.id);
             localStorage.setItem('usuarioEmail', data.email);
