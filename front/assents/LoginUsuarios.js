@@ -29,17 +29,22 @@ formLogin.addEventListener('submit', (e) => {
     .then(data => {
         // Verifica se a resposta contém a chave tipoUsuario
         if (data && data.tipoUsuario) {
-            // Armazena os dados no localStorage
-            localStorage.setItem('foto_url', data.foto_url)
-            localStorage.setItem('tipoUsuario', data.tipoUsuario);
-            localStorage.setItem('usuarioId', data.id);
-            localStorage.setItem('usuarioEmail', data.email);
+               const userData = {
+            id: data.id,
+            nome: data.nome, // <-- Adicione o nome do usuário aqui
+            email: data.email,
+            foto_url: data.foto_url,
+            tipoUsuario: data.tipoUsuario
+        };
+
+        // Armazena o objeto completo no localStorage em uma única chave
+        localStorage.setItem('user', JSON.stringify(userData));
 
             // Redireciona com base no tipo de usuário
             if (data.tipoUsuario === 'tutor') {
                 window.location.href = "telaTutor.html"; // Redireciona para a tela do tutor
             } else if (data.tipoUsuario === 'ong') {
-                window.location.href = "telaOng.html"; // Redireciona para a tela da ONG
+                window.location.href = "ong/telaInicialOng.html"; // Redireciona para a tela da ONG
             } else if (data.tipoUsuario === 'admin') {
                 window.location.href = "Adm/TelaInicialAdm.html"; // Redireciona para a tela do admin
             }

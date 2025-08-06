@@ -144,7 +144,7 @@ document.getElementById('form-ong').addEventListener('submit', async function(ev
             email: email,
             senha_hash: senha, // A senha em texto puro, que o backend irá hashear
             tipoUsuario: 'ONG',
-            foto_url: 'https://img.freepik.com/vetores-premium/avatar-de-perfil-padrao-de-silhueta-preta_664995-355.jpg',
+            foto_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdGIriHwMYbjKJI76jDDK8KzXXSZhiNKGs9g&s',
             ativo: true
         };
 
