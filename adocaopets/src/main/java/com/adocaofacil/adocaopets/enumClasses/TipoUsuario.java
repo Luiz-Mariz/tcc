@@ -4,5 +4,7 @@ public enum TipoUsuario {
     TUTOR,
     tutor,
     ONG,
-    ADMIN
+    ong,
+    ADMIN,
+    admin
 }

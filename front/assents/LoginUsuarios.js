@@ -41,7 +41,7 @@ formLogin.addEventListener('submit', (e) => {
             } else if (data.tipoUsuario === 'ong') {
                 window.location.href = "telaOng.html"; // Redireciona para a tela da ONG
             } else if (data.tipoUsuario === 'admin') {
-                window.location.href = "telaAdmin.html"; // Redireciona para a tela do admin
+                window.location.href = "Adm/TelaInicialAdm.html"; // Redireciona para a tela do admin
             }
         } else {
             Swal.fire('Erro', 'Usuário ou senha inválidos.', 'error');
