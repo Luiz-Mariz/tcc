@@ -172,3 +172,49 @@ document.addEventListener('DOMContentLoaded', () => {
         formCadastro.addEventListener('submit', cadastro);
     }
 });
+
+function formatarCpf(event) {
+    let cpf = event.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+    if (cpf.length <= 3) {
+        cpf = cpf.replace(/(\d{1,3})(\d{0,})/, '$1.$2');
+    } else if (cpf.length <= 6) {
+        cpf = cpf.replace(/(\d{3})(\d{1,3})(\d{0,})/, '$1.$2.$3');
+    } else if (cpf.length <= 9) {
+        cpf = cpf.replace(/(\d{3})(\d{3})(\d{0,})/, '$1.$2.$3');
+    } else {
+        cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{0,})/, '$1.$2.$3-$4');
+    }
+
+    // Limita a quantidade de caracteres para 11
+    if (cpf.length > 14) {
+        cpf = cpf.substring(0, 14); // 14 caracteres é o comprimento máximo de um CPF formatado
+    }
+
+    event.target.value = cpf; // Atualiza o valor do campo
+}
+
+function formatarTelefone(event) {
+    let telefone = event.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+    // Formata para o padrão (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+    if (telefone.length <= 2) {
+        telefone = telefone.replace(/(\d{0,2})/, '($1');
+    } else if (telefone.length <= 6) {
+        telefone = telefone.replace(/(\d{2})(\d{0,4})/, '($1) $2');
+    } else if (telefone.length <= 10) {
+        telefone = telefone.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else {
+        telefone = telefone.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    }
+
+    // Limita a quantidade de caracteres para 10 ou 11 (dependendo do tipo de telefone)
+    if (telefone.length > 15) {
+        telefone = telefone.substring(0, 15); // 15 caracteres é o comprimento máximo de um telefone formatado
+    }
+
+    event.target.value = telefone; // Atualiza o valor do campo
+}
+
+
+
