@@ -1,11 +1,8 @@
 package com.adocaofacil.adocaopets.service.animal;
 
 import com.adocaofacil.adocaopets.model.animal.AdocaoModel;
-import com.adocaofacil.adocaopets.model.animal.AnimalModel;
 import com.adocaofacil.adocaopets.repository.animal.AdocaoRepository;
-import com.adocaofacil.adocaopets.repository.animal.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

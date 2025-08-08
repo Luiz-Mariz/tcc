@@ -59,7 +59,16 @@
                 <a class="text-gray-300 font-bold hover:text-white" href="../TelaSejaParceiro.html">Seja Nosso Parceiro</a>
 
                 <div id="user-profile-info-desktop" class="relative">
+                    <button id="profile-menu-button-desktop" class="flex items-center space-x-2 focus:outline-none">
+                        <img src="https://placehold.co/40x40" alt="Foto de perfil" class="w-10 h-10 rounded-full object-cover border-2 border-purple-300"/>
+                    </button>
+                    <div id="profile-menu-desktop" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden">
+                        <a href="perfil.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Meu Perfil</a>
+                        <a href="../ong/TelaCadastroPet.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gerenciar Pets</a>
+                        <a href="../TelaPetCadastrados.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gerenciar Usuários</a>
+                        <button id="logout-button-desktop" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Sair</button>
                     </div>
+                </div>
             </nav>
 
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none"
@@ -79,17 +88,17 @@
                 class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
 
             <div id="user-profile-info-mobile" class="flex flex-col space-y-2 mx-4 mt-2 px-4 py-2">
+                <button id="profile-menu-button-mobile" class="flex items-cent
+                er space-x-2 focus:outline-none">
+                    <img src="https://placehold.co/40x40" alt="Foto de perfil" class="w-10 h-10 rounded-full object-cover border-2 border-purple-300"/>
+                    <strong class="block text-gray-200 text-lg">Usuário</strong>
+                </button>
+                <div id="profile-menu-mobile" class="bg-purple-600 mt-2 py-1 rounded-md hidden">
+                    <a href="" class="block px-4 py-2 text-sm text-gray-200 hover:bg-purple-500">Meu Perfil</a>
+                    <a href="TelaCadastroPet.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-purple-500">Gerenciar Pets</a>
+                    <a href="../TelaPetCadastrados.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-purple-500">Pets Cadastrados</a>
+                    <button id="logout-button-mobile" class="block w-full text-left px-4 py-2 text-sm text-red-300 hover:bg-purple-500">Sair</button>
                 </div>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up delay-400">
-                <a href="gerenciar-usuarios.html"
-                    class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">
-                    Gerenciar Usuários
-                </a>
-                <a href="gerenciar-pets.html"
-                    class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">
-                    Gerenciar Pets
-                </a>
             </div>
         </nav>
     </header>
@@ -312,7 +321,7 @@
             </div>
         </div>
     </footer>
-
+    
     <script src="/front/assents/TelaInicialOng.js"></script>
 </body>
 

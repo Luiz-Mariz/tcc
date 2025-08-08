@@ -2,5 +2,7 @@ package com.adocaofacil.adocaopets.enumClasses;
 
 public enum SexoAnimal {
     MACHO,
-    FEMEA
+    FEMEA,
+    macho,
+    femea
 }

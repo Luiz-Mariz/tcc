@@ -36,6 +36,13 @@ public class OngController {
                .map(ResponseEntity :: ok)
                .orElse(ResponseEntity.notFound().build());
     }
+    
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<OngModel> buscarPorIdUsuario(@PathVariable Long idUsuario) {
+        return service.buscarPorIdUsuario(idUsuario)
+               .map(ResponseEntity::ok)
+               .orElse(ResponseEntity.notFound().build());
+    }
 
     @PostMapping
     public OngModel salvar(@RequestBody OngModel ongModel){ 

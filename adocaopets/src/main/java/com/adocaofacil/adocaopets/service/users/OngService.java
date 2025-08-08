@@ -30,4 +30,8 @@ public class OngService {
     public void deletar(Long id){
         repository.deleteById(id);
     }
+
+    public Optional<OngModel> buscarPorIdUsuario(Long idUsuario) {
+        return repository.findByUsuarioId(idUsuario);
+    }
 }

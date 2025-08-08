@@ -21,13 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const userProfileInfoDesktop = document.getElementById('user-profile-info-desktop');
     const userProfileInfoMobile = document.getElementById('user-profile-info-mobile');
 
+    // Novos elementos do menu de perfil
+    const profileMenuButtonDesktop = document.getElementById('profile-menu-button-desktop');
+    const profileMenuDesktop = document.getElementById('profile-menu-desktop');
+    const profileMenuButtonMobile = document.getElementById('profile-menu-button-mobile');
+    const profileMenuMobile = document.getElementById('profile-menu-mobile');
+    const logoutButtonDesktop = document.getElementById('logout-button-desktop');
+    const logoutButtonMobile = document.getElementById('logout-button-mobile');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+
     // --- FUNÇÕES PRINCIPAIS ---
 
     // Função para buscar os pets da API
     async function fetchPets() {
         showLoading();
         try {
-            const response = await fetch('http://localhost:8080/animais');
+            const response = await fetch('http://localhost:8080/animal');
             if (!response.ok) {
                 throw new Error(`Erro na API: ${response.status}`);
             }
@@ -90,40 +100,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Função para atualizar o perfil do cabeçalho
-    // ** CORRIGIDO **
     async function updateHeaderProfile() {
-        // Pega o usuário do localStorage
         const storedUser = JSON.parse(localStorage.getItem('user'));
-        const user = storedUser || {}; // Se não encontrar, usa um objeto vazio
+        const user = storedUser || {};
 
-        // Passa o objeto do usuário para a função que exibe o perfil
-        displayUserProfile(user, userProfileInfoDesktop);
-        displayUserProfile(user, userProfileInfoMobile);
+        displayUserProfile(user, userProfileInfoDesktop, 'desktop');
+        displayUserProfile(user, userProfileInfoMobile, 'mobile');
     }
 
-    // Função auxiliar para exibir o perfil na barra lateral
-    // ** CORRIGIDO **
-    function displayUserProfile(user, element) {
-        if (!element) return; // Garante que o elemento existe
+    // Função auxiliar para exibir o perfil
+    function displayUserProfile(user, element, type) {
+        if (!element) return;
 
-        // Define o nome e a URL da foto, usando um fallback se não existirem
         const userName = user.nome || 'Usuário';
-        const userPhoto = user.foto_url || 'https://placehold.co/40x40'; 
+        const userPhoto = user.foto_url || 'https://placehold.co/40x40';
 
-        // Define o link do perfil. Se o usuário estiver logado, vai para a página de perfil. Caso contrário, para o login.
-        const profileLink = user.nome ? 'perfil.html' : 'TelaLogin.html';
-        
-        element.innerHTML = `
-            <a id="profile-link" href="${profileLink}" class="flex items-center space-x-2">
-                <img src="${userPhoto}"
-                    alt="Foto de perfil do usuário"
-                    class="w-10 h-10 rounded-full object-cover border-2 border-purple-300"
-                />
-                <div class="hidden lg:block">
-                    <strong class="block text-gray-900 text-lg">${userName}</strong>
-                </div>
-            </a>
-        `;
+        if (type === 'desktop') {
+            const photoEl = element.querySelector('img');
+            photoEl.src = userPhoto;
+            photoEl.alt = `Foto de perfil de ${userName}`;
+        } else if (type === 'mobile') {
+            const photoEl = element.querySelector('img');
+            const nameEl = element.querySelector('strong');
+            photoEl.src = userPhoto;
+            photoEl.alt = `Foto de perfil de ${userName}`;
+            nameEl.textContent = userName;
+        }
+    }
+
+    // Função para deslogar
+    function handleLogout() {
+        localStorage.removeItem('user');
+        window.location.href = 'TelaLogin.html'; // Redireciona para a tela de login
     }
 
     // Funções de manipulação de mensagens
@@ -221,10 +229,30 @@ document.addEventListener('DOMContentLoaded', () => {
         prevBtn.addEventListener('click', handlePaginationClick);
         nextBtn.addEventListener('click', handlePaginationClick);
 
-        document.getElementById('mobile-menu-button').addEventListener('click', () => {
-            const mobileMenu = document.getElementById('mobile-menu');
+        // Funcionalidade do menu mobile com o ícone de hambúrguer
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        
+        mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+
+        // Funcionalidade do menu dropdown do perfil desktop
+        profileMenuButtonDesktop.addEventListener('click', () => {
+            profileMenuDesktop.classList.toggle('hidden');
+        });
+
+        // Funcionalidade do menu dropdown do perfil mobile
+        profileMenuButtonMobile.addEventListener('click', () => {
+            profileMenuMobile.classList.toggle('hidden');
+        });
+
+        // Adiciona evento de clique para o botão de Sair
+        if(logoutButtonDesktop) {
+            logoutButtonDesktop.addEventListener('click', handleLogout);
+        }
+        if(logoutButtonMobile) {
+            logoutButtonMobile.addEventListener('click', handleLogout);
+        }
     }
 
     function init() {

@@ -4,5 +4,9 @@ public enum StatusAnimal {
     DISPONIVEL,
     ADOTADO,
     EMTRATAMENTO,
-    PERDIDO
+    PERDIDO,
+    disponivel,
+    adotado,
+    emTratamento,
+    perdido
 }
