@@ -70,7 +70,7 @@ CREATE TABLE Animal (
     status ENUM('disponível', 'adotado', 'em tratamento', 'perdido') DEFAULT 'disponível',
     id_tipo_animal INT NOT NULL,
     id_ong INT,
-    data_cadastro DATE DEFAULT CURRENT_TIMESTAMP,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_tipo_animal) REFERENCES Tipo_Animal(id),
     FOREIGN KEY (id_ong) REFERENCES ONG(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -80,7 +80,7 @@ CREATE TABLE Historico_Medico (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_animal INT NOT NULL,
     descricao TEXT NOT NULL,
-    data_registro DATE DEFAULT CURRENT_TIMESTAMP,
+    data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_animal) REFERENCES Animal(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -99,7 +99,7 @@ CREATE TABLE Adocao (
     status ENUM('aguardando contato', 'em andamento', 'concluido') NOT NULL DEFAULT 'aguardando contato',
     id_pessoa INT NOT NULL,
     id_animal INT NOT NULL,
-    data_peticao DATE DEFAULT CURRENT_TIMESTAMP,
+    data_peticao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_conclusao DATE,
     observacoes TEXT,
     FOREIGN KEY (id_pessoa) REFERENCES Tutor(id),

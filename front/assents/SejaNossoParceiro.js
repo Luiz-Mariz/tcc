@@ -188,3 +188,42 @@ document.getElementById('form-ong').addEventListener('submit', async function(ev
         });
     }
 });
+
+document.getElementById('cnpj').addEventListener('input', function (e) {
+    let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+    if (valor.length > 14) valor = valor.slice(0, 14); // Limita a 14 dígitos
+
+    // Aplica a máscara: 00.000.000/0000-00
+    valor = valor.replace(/^(\d{2})(\d)/, '$1.$2');
+    valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+    valor = valor.replace(/\.(\d{3})(\d)/, '.$1/$2');
+    valor = valor.replace(/(\d{4})(\d)/, '$1-$2');
+
+    e.target.value = valor;
+});
+
+// Máscara para CEP
+document.getElementById('cep').addEventListener('input', function (e) {
+    let valor = e.target.value.replace(/\D/g, ''); // Remove não numéricos
+    if (valor.length > 8) valor = valor.slice(0, 8); // Limita a 8 dígitos
+
+    // Aplica a máscara: 00000-000
+    valor = valor.replace(/^(\d{5})(\d)/, '$1-$2');
+
+    e.target.value = valor;
+    
+});
+
+const telEl = document.getElementById('telefone');
+if (telEl) {
+  telEl.addEventListener('input', e => {
+    let valor = e.target.value.replace(/\D/g, '').slice(0, 11); // só números, máx 11 dígitos
+    if (valor.length > 2) {
+      valor = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
+    }
+    if (valor.length > 10) {
+      valor = valor.slice(0, 10) + ' ' + valor.slice(10);
+    }
+    e.target.value = valor;
+  });
+}

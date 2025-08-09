@@ -181,6 +181,12 @@ function setupFormSubmission() {
 }
 
 function coletarDadosDoFormulario() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (!storedUser || !storedUser.ong || !storedUser.ong.id) {
+        throw new Error("Não foi possível encontrar o ID da ONG no localStorage.");
+    }
+    const idOng = storedUser.ong.id; // ou storedUser.id_ong
+
     const form = document.querySelector('form');
     const formData = new FormData(form);
 
@@ -190,7 +196,7 @@ function coletarDadosDoFormulario() {
     if (isNaN(id_tipo_animal)) {
         throw new Error("Por favor, selecione uma espécie válida para o animal.");
     }
-    
+
     const porteValue = formData.get('porte');
     if (!porteValue) {
         throw new Error("O porte do animal é obrigatório.");
@@ -199,7 +205,7 @@ function coletarDadosDoFormulario() {
     if (!sexoValue) {
         throw new Error("O sexo do animal é obrigatório.");
     }
-    
+
     const animal = {
         nome: formData.get('nome') || null,
         idade: parseInt(formData.get('idade')) || null,
@@ -207,20 +213,18 @@ function coletarDadosDoFormulario() {
         sexo: sexoValue.toUpperCase(),
         descricao: formData.get('descricao') || null,
         foto_url: formData.get('foto_url') || null,
-        status: 'DISPONIVEL', 
+        status: 'DISPONIVEL',
         tipoAniaml: {
             id: id_tipo_animal
         },
-        // **IMPORTANTE**: Adicione a lógica para enviar o ID da ONG
-        // obtido do `localStorage` aqui.
-        // Exemplo:
-       ong: {
-                id: idOng
-            }
+        ong: {
+            id: idOng
+        }
     };
 
     return animal;
 }
+
 
 async function cadastrarAnimal(animalData) {
     const url = `${API_BASE_URL}/animal`;
