@@ -62,7 +62,7 @@ CREATE TABLE Tutor (
 CREATE TABLE Animal (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
-    idade INT,
+    idade VARCHAR(100),
     porte ENUM('pequeno', 'medio', 'grande'),
     sexo ENUM('Macho', 'Femea'),
     descricao TEXT,
