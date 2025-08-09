@@ -66,7 +66,7 @@ CREATE TABLE Animal (
     porte ENUM('pequeno', 'medio', 'grande'),
     sexo ENUM('Macho', 'Femea'),
     descricao TEXT,
-    foto_url VARCHAR(255),
+    foto BLOB,
     status ENUM('disponível', 'adotado', 'em tratamento', 'perdido') DEFAULT 'disponível',
     id_tipo_animal INT NOT NULL,
     id_ong INT,
