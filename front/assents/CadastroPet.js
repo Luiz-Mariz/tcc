@@ -226,24 +226,60 @@ function coletarDadosDoFormulario() {
 }
 
 
-async function cadastrarAnimal(animalData) {
-    const url = `${API_BASE_URL}/animal`;
+// Supondo que o form tem id="form-pet"
+const form = document.querySelector('form');
 
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(animalData),
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // Pegando valores simples
+  const nome = document.getElementById('nome').value;
+  const idade = document.getElementById('idade').value; // vai ser string tipo 'filhote'
+  const porte = document.getElementById('porte').value;
+  const sexo = document.getElementById('sexo').value;
+  const descricao = document.getElementById('descricao').value;
+
+  // Pegando a foto (só a primeira, caso tenha múltiplas)
+  const inputFoto = document.getElementById('file-upload');
+  const fotoFile = inputFoto.files[0]; // pode ser undefined se não selecionar
+
+  // Montar o objeto animal conforme esperado pelo backend
+  const animal = {
+    nome: nome,
+    idade: idade || null,  // cuidado: se backend quer número, pode precisar converter
+    porte: porte.toUpperCase(), // se o backend espera em maiúsculas
+    sexo: sexo.toUpperCase(),   // idem
+    descricao: descricao,
+    status: "DISPONIVEL",
+    tipoAniaml: { id: 1 },  // ajustar conforme sua regra
+    ong: { id: 2 }          // ajustar conforme contexto real
+  };
+
+  // Montar FormData
+  const formData = new FormData();
+  formData.append("animal", new Blob([JSON.stringify(animal)], { type: "application/json" }));
+  if (fotoFile) {
+    formData.append("foto", fotoFile);
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/animal", {
+      method: "POST",
+      body: formData,
     });
-
     if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Erro ao enviar dados do pet para a API: ${response.status} - ${errorText}`);
+      const error = await response.text();
+      throw new Error(error);
     }
+    const result = await response.json();
+    console.log("Animal cadastrado:", result);
+  } catch (err) {
+    console.error("Erro no cadastro:", err);
+  }
+});
 
-    return response.json();
-}
+
+
 
 // --- FUNÇÃO DE INICIALIZAÇÃO GERAL ---
 document.addEventListener('DOMContentLoaded', () => {

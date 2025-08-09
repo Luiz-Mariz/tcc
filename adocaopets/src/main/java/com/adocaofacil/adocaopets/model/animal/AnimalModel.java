@@ -25,8 +25,8 @@ public class AnimalModel {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "idade")
-    private Integer idade;
+   @Column(name = "idade")
+   private String idade;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "porte")
@@ -40,8 +40,8 @@ public class AnimalModel {
     private String descricao;
 
     @Lob
-    @Column(name = "foto_url")
-    private String foto_url;
+    @Column(name = "foto", columnDefinition = "LONGBLOB")
+    private byte[] foto;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
