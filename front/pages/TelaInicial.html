@@ -78,7 +78,8 @@
                 aria-label="Abrir menu de navegação">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
                 </svg>
             </button>
         </div>
@@ -102,10 +103,6 @@
                 <button id="logout-button-mobile"
                     class="block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow transition duration-300 ease-in-out text-center">Sair</button>
             </div>
-            <a id="login-button-mobile" href="TelaLogin.html"
-                class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded text-sm shadow transition duration-300 ease-in-out text-center">
-                Entrar
-            </a>
         </nav>
     </header>
 
@@ -145,39 +142,53 @@
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-purple-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+                <div
+                    class="bg-purple-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
                     <div class="bg-purple-200 p-4 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-purple-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        <svg class="w-10 h-10 text-purple-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                            </path>
                         </svg>
                     </div>
                     <h3 class="text-2xl font-bold text-purple-800 mb-4">Adoção Consciente e Segura</h3>
                     <p class="text-gray-700 text-md leading-relaxed">
-                        Facilitamos o processo de adoção, conectando tutores responsáveis a animais em busca de um lar. Garantimos que cada adoção seja um match perfeito e duradouro.
+                        Facilitamos o processo de adoção, conectando tutores responsáveis a animais em busca de um lar.
+                        Garantimos que cada adoção seja um match perfeito e duradouro.
                     </p>
                 </div>
 
-                <div class="bg-green-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+                <div
+                    class="bg-green-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
                     <div class="bg-green-200 p-4 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002.944 12c.047 1.258.232 2.502.551 3.72a12.004 12.004 0 004.975 5.503A12.001 12.001 0 0012 21.056c1.258-.047 2.502-.232 3.72-.551a12.004 12.004 0 005.503-4.975A12.001 12.001 0 0021.056 12a11.955 11.955 0 01-3.04-8.618z"></path>
+                        <svg class="w-10 h-10 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002.944 12c.047 1.258.232 2.502.551 3.72a12.004 12.004 0 004.975 5.503A12.001 12.001 0 0012 21.056c1.258-.047 2.502-.232 3.72-.551a12.004 12.004 0 005.503-4.975A12.001 12.001 0 0021.056 12a11.955 11.955 0 01-3.04-8.618z">
+                            </path>
                         </svg>
                     </div>
                     <h3 class="text-2xl font-bold text-green-800 mb-4">Priorizando o Bem-Estar</h3>
                     <p class="text-gray-700 text-md leading-relaxed">
-                        Todos os pets divulgados são verificados para garantir que estejam saudáveis, vacinados e desparasitados, prontos para uma vida feliz em seu novo lar.
+                        Todos os pets divulgados são verificados para garantir que estejam saudáveis, vacinados e
+                        desparasitados, prontos para uma vida feliz em seu novo lar.
                     </p>
                 </div>
 
-                <div class="bg-blue-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+                <div
+                    class="bg-blue-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
                     <div class="bg-blue-200 p-4 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2m2-13h11m-1 4h5m-9 11h3M4 15h12"></path>
+                        <svg class="w-10 h-10 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2m2-13h11m-1 4h5m-9 11h3M4 15h12"></path>
                         </svg>
                     </div>
                     <h3 class="text-2xl font-bold text-blue-800 mb-4">Uma Comunidade Acolhedora</h3>
                     <p class="text-gray-700 text-md leading-relaxed">
-                        Faça parte de uma rede de amantes de animais em Belo Horizonte. Oferecemos recursos, dicas e suporte para tutores e parceiros.
+                        Faça parte de uma rede de amantes de animais em Belo Horizonte. Oferecemos recursos, dicas e
+                        suporte para tutores e parceiros.
                     </p>
                 </div>
             </div>
@@ -198,22 +209,26 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <h3 class="text-2xl font-bold text-gray-700 mb-2">Animais Abandonados</h3>
-                    <p class="text-lg text-gray-600">Estimativa de <span class="font-semibold text-purple-600">30.000 animais</span> nas ruas.</p>
+                    <p class="text-lg text-gray-600">Estimativa de <span class="font-semibold text-purple-600">30.000
+                            animais</span> nas ruas.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <h3 class="text-2xl font-bold text-gray-700 mb-2">Alta Temporada</h3>
-                    <p class="text-lg text-gray-600">Aumento de <span class="font-semibold text-orange-500">40% no abandono</span> após festas.</p>
+                    <p class="text-lg text-gray-600">Aumento de <span class="font-semibold text-orange-500">40% no
+                            abandono</span> após festas.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <h3 class="text-2xl font-bold text-gray-700 mb-2">Superlotação</h3>
-                    <p class="text-lg text-gray-600">ONGs excedem <span class="font-semibold text-red-500">60% da capacidade</span> de acolhimento.</p>
+                    <p class="text-lg text-gray-600">ONGs excedem <span class="font-semibold text-red-500">60% da
+                            capacidade</span> de acolhimento.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <h3 class="text-2xl font-bold text-gray-700 mb-2">Custo Municipal</h3>
-                    <p class="text-lg text-gray-600">R$<span class="font-semibold text-green-600">5 milhões anuais</span> em cuidados e recolhimentos.</p>
+                    <p class="text-lg text-gray-600">R$<span class="font-semibold text-green-600">5 milhões
+                            anuais</span> em cuidados e recolhimentos.</p>
                 </div>
             </div>
 
@@ -236,7 +251,7 @@
             </div>
         </div>
     </section>
-    <section class="w-full max-w-4xl px-6 py-12">
+    <section class="w-full max-w-6xl px-6 py-12" id="galeria-pets-section">
         <h2 class="text-3xl font-bold text-purple-800 mb-6 text-center">Nossos Amiguinhos Esperando por um Lar</h2>
         <div class="flex flex-col sm:flex-row gap-4 mb-8">
             <input type="text" id="search-input" placeholder="Pesquisar por nome ou raça..."
@@ -258,12 +273,25 @@
                 <option value="Médio">Médio</option>
                 <option value="Grande">Grande</option>
             </select>
+
         </div>
 
-        <div id="galeria-pets" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div id="galeria-pets" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <p id="loading-message" class="col-span-full text-center text-gray-600">Carregando pets...</p>
             <p id="no-pets-message" class="col-span-full text-center text-gray-600 hidden">Nenhum pet encontrado para
                 os critérios selecionados.</p>
+        </div>
+
+        <div id="pagination-controls" class="flex justify-center mt-8 hidden">
+            <nav class="flex items-center space-x-2" aria-label="Paginação">
+                <a href="#" id="previous-page-btn"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">Anterior</a>
+                
+                <div id="page-numbers" class="flex items-center space-x-2"></div>
+                
+                <a href="#" id="next-page-btn"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">Próxima</a>
+            </nav>
         </div>
     </section>
 
@@ -294,286 +322,7 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById('mobile-menu-button').onclick = function () {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        };
-
-        // --- Configurações da API ---
-        const USER_PROFILE_API_URL = 'https://api.example.com/api/user/profile'; // <-- Substitua pelo URL real do seu backend para o perfil do usuário!
-        const PETS_API_URL = 'https://api.example.com/api/pets'; // <-- Substitua pelo URL real do seu backend para os pets!
-        const AUTH_TOKEN_KEY = 'authToken'; // Chave para o token no localStorage
-
-        // --- Funções para o Perfil do Usuário (mantidas do exemplo anterior) ---
-        async function fetchUserData() {
-            try {
-                const token = localStorage.getItem(AUTH_TOKEN_KEY);
-                // NOTA: Para a página inicial, não redirecionamos automaticamente se não houver token.
-                // Apenas retornamos null para que o botão de login apareça.
-                if (!token || token === 'seu_token_de_autenticacao_aqui') {
-                    console.log('Nenhum token de autenticação real encontrado ou placeholder. Usuário não logado.');
-                    return null;
-                }
-
-                const response = await fetch(USER_PROFILE_API_URL, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (!response.ok) {
-                    console.error(`Erro ao buscar dados do usuário: ${response.status} ${response.statusText}`);
-                    if (response.status === 401 || response.status === 403) {
-                        Swal.fire({
-                            title: 'Sessão expirada!',
-                            text: 'Por favor, faça login novamente.',
-                            icon: 'warning',
-                            timer: 3000,
-                            timerProgressBar: true,
-                            showConfirmButton: false
-                        }).then(() => {
-                            localStorage.removeItem(AUTH_TOKEN_KEY); // Limpa token inválido
-                            // Opcional: redirecionar para login
-                            // window.location.href = 'TelaLogin.html';
-                        });
-                    }
-                    return null;
-                }
-
-                const userData = await response.json();
-                console.log('Dados do usuário recebidos:', userData);
-
-                // Adapte para os nomes dos campos que sua API retorna
-                return {
-                    name: userData.nome || userData.name,
-                    avatar: userData.foto_perfil || userData.profile_url || 'https://www.jornalhorah.com.br/wp-content/uploads/2019/06/30-C%C3%A3es-e-gatos-de-rua.jpg' // Fallback para avatar
-                };
-
-            } catch (error) {
-                console.error('Erro na requisição da API de perfil:', error);
-                Swal.fire({
-                    title: 'Erro de conexão!',
-                    text: 'Não foi possível carregar seu perfil. Tente novamente mais tarde.',
-                    icon: 'error',
-                    timer: 4000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                });
-                return null;
-            }
-        }
-
-        async function updateHeaderProfile() {
-            const userData = await fetchUserData();
-
-            const userProfileDesktop = document.getElementById('user-profile-desktop');
-            const userNameDesktop = document.getElementById('user-name-desktop');
-            const userAvatarDesktop = document.getElementById('user-avatar-desktop');
-            const loginButtonDesktop = document.getElementById('login-button-desktop');
-            let logoutButtonDesktop = document.getElementById('logout-button-desktop');
-
-            const userProfileMobile = document.getElementById('user-profile-mobile');
-            const userNameMobile = document.getElementById('user-name-mobile');
-            const userAvatarMobile = document.getElementById('user-avatar-mobile');
-            const loginButtonMobile = document.getElementById('login-button-mobile');
-            let logoutButtonMobile = document.getElementById('logout-button-mobile');
-
-            // Verifica se os botões de logout já existem e os adiciona os event listeners
-            if (logoutButtonDesktop) {
-                logoutButtonDesktop.removeEventListener('click', doLogout); // Remove para evitar duplicidade
-                logoutButtonDesktop.addEventListener('click', doLogout);
-            }
-            if (logoutButtonMobile) {
-                logoutButtonMobile.removeEventListener('click', doLogout); // Remove para evitar duplicidade
-                logoutButtonMobile.addEventListener('click', doLogout);
-            }
-
-            if (userData && userData.name && userData.avatar) {
-                // Desktop
-                userProfileDesktop.classList.remove('hidden');
-                userProfileDesktop.classList.add('flex');
-                userNameDesktop.textContent = userData.name;
-                userAvatarDesktop.src = userData.avatar;
-                loginButtonDesktop.classList.add('hidden');
-                if (logoutButtonDesktop) logoutButtonDesktop.classList.remove('hidden');
-
-                // Mobile
-                userProfileMobile.classList.remove('hidden');
-                userProfileMobile.classList.add('flex', 'flex-col');
-                userNameMobile.textContent = userData.name;
-                userAvatarMobile.src = userData.avatar;
-                loginButtonMobile.classList.add('hidden');
-                if (logoutButtonMobile) logoutButtonMobile.classList.remove('hidden');
-
-            } else {
-                // Desktop
-                userProfileDesktop.classList.add('hidden');
-                userProfileDesktop.classList.remove('flex');
-                loginButtonDesktop.classList.remove('hidden');
-                if (logoutButtonDesktop) logoutButtonDesktop.classList.add('hidden');
-
-                // Mobile
-                userProfileMobile.classList.add('hidden');
-                userProfileMobile.classList.remove('flex', 'flex-col');
-                loginButtonMobile.classList.remove('hidden');
-                if (logoutButtonMobile) logoutButtonMobile.classList.add('hidden');
-            }
-        }
-
-        // Função de Logout (copiada e ajustada da tela "Minha Conta")
-        function doLogout() {
-            Swal.fire({
-                title: 'Tem certeza?',
-                text: "Você será desconectado da sua conta.",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#8B5CF6',
-                cancelButtonColor: '#EF4444',
-                confirmButtonText: 'Sim, sair!',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    localStorage.removeItem(AUTH_TOKEN_KEY); // Remove o token
-                    Swal.fire(
-                        'Desconectado!',
-                        'Você foi desconectado com sucesso.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = 'index.html'; // Redireciona para a página inicial
-                    });
-                }
-            });
-        }
-
-        // --- Funções para os Pets (mantidas do exemplo anterior) ---
-        const galeriaPetsDiv = document.getElementById('galeria-pets');
-        const loadingMessage = document.getElementById('loading-message');
-        const noPetsMessage = document.getElementById('no-pets-message');
-        const searchInput = document.getElementById('search-input');
-        const speciesFilter = document.getElementById('species-filter');
-        const sizeFilter = document.getElementById('size-filter');
-
-        let allPets = []; // Armazenar todos os pets para filtragem
-
-        // Função para criar o HTML de um cartão de pet
-        function createPetCard(pet) {
-            // Garante que as propriedades existem e têm valores padrão se ausentes
-            const name = pet.nome || 'Nome Desconhecido';
-            const species = pet.especie || 'Não informada';
-            const size = pet.porte || 'Não informado';
-            const age = pet.idade ? `${pet.idade} Ano${pet.idade > 1 ? 's' : ''}` : 'Idade não informada';
-            const description = pet.descricao || 'Este pet está em busca de um lar amoroso.';
-            const imageUrl = pet.imagem_url || 'https://img.vozdascomunidades.com.br/wp-content/uploads/2024/03/14110011/ANIMAIS-ABANDONADOS-PELAS-COMUNIDADES-SELMA-SOUZA-4-scaled.jpg'; // Imagem de fallback
-
-            return `
-                <article class="bg-white border border-purple-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out overflow-hidden">
-                    <img src="${imageUrl}" alt="Foto de ${name}" class="w-full h-48 object-cover object-center img-zoom-hover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-purple-900 mb-1">${name}</h3>
-                        <p class="text-sm text-gray-600 mb-2">${species} • ${size} • ${age}</p>
-                        <p class="text-gray-700 text-sm line-clamp-2">${description}</p>
-                        <a href="TelaDetalhesPet.html?id=${pet.id}"
-                            class="mt-3 inline-block bg-purple-700 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-800 transition">Ver
-                            Detalhes</a>
-                    </div>
-                </article>
-            `;
-        }
-
-        // Função para renderizar os pets na galeria
-        function renderPets(petsToDisplay) {
-            galeriaPetsDiv.innerHTML = ''; // Limpa a galeria existente
-            loadingMessage.classList.add('hidden'); // Esconde a mensagem de carregamento
-
-            if (petsToDisplay.length === 0) {
-                noPetsMessage.classList.remove('hidden');
-            } else {
-                noPetsMessage.classList.add('hidden');
-                petsToDisplay.forEach(pet => {
-                    galeriaPetsDiv.innerHTML += createPetCard(pet);
-                });
-            }
-        }
-
-        // Função para buscar os dados dos pets da API
-        async function fetchPetsData() {
-            loadingMessage.classList.remove('hidden');
-            noPetsMessage.classList.add('hidden'); // Esconde a mensagem de "nenhum pet" enquanto carrega
-
-            try {
-                const response = await fetch(PETS_API_URL, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // 'Authorization': `Bearer ${localStorage.getItem('authToken')}` // Se a API de pets exigir autenticação
-                    }
-                });
-
-                if (!response.ok) {
-                    console.error(`Erro ao buscar pets: ${response.status} ${response.statusText}`);
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Não foi possível carregar os pets. Tente novamente mais tarde.',
-                        icon: 'error',
-                        timer: 4000,
-                        timerProgressBar: true,
-                        showConfirmButton: false
-                    });
-                    return []; // Retorna um array vazio em caso de erro
-                }
-
-                const pets = await response.json();
-                console.log('Pets recebidos:', pets);
-
-                // Armazena todos os pets para filtragem posterior
-                allPets = pets;
-                renderPets(allPets); // Renderiza todos os pets inicialmente
-                return pets;
-
-            } catch (error) {
-                console.error('Erro na requisição da API de pets:', error);
-                Swal.fire({
-                    title: 'Erro de conexão!',
-                    text: 'Não foi possível carregar os dados dos pets. Verifique sua conexão.',
-                    icon: 'error',
-                    timer: 4000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                });
-                return [];
-            }
-        }
-
-        // Função de filtragem e pesquisa
-        function filterAndSearchPets() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedSpecies = speciesFilter.value;
-            const selectedSize = sizeFilter.value;
-
-            const filteredPets = allPets.filter(pet => {
-                const matchesSearch = pet.nome.toLowerCase().includes(searchTerm) ||
-                                             (pet.raca && pet.raca.toLowerCase().includes(searchTerm)); // Adicionado busca por raça
-                const matchesSpecies = selectedSpecies === '' || pet.especie === selectedSpecies;
-                const matchesSize = selectedSize === '' || pet.porte === selectedSize;
-
-                return matchesSearch && matchesSpecies && matchesSize;
-            });
-
-            renderPets(filteredPets);
-        }
-
-        // Adicionar event listeners para os filtros e pesquisa
-        searchInput.addEventListener('input', filterAndSearchPets);
-        speciesFilter.addEventListener('change', filterAndSearchPets);
-        sizeFilter.addEventListener('change', filterAndSearchPets);
-
-        // Chamar as funções ao carregar a página
-        document.addEventListener('DOMContentLoaded', () => {
-            updateHeaderProfile();
-            fetchPetsData();
-        });
-    </script>
+    <script src="/front/assents/TelaIncial.js"></script>
 </body>
+
 </html>
