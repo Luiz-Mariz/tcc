@@ -4,5 +4,7 @@ public enum SexoAnimal {
     MACHO,
     FEMEA,
     macho,
-    femea
+    femea,
+    Macho,
+    Femea
 }

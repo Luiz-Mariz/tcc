@@ -1,9 +1,13 @@
 package com.adocaofacil.adocaopets.model.animal;
 
+import java.util.Base64;
+
 import com.adocaofacil.adocaopets.enumClasses.PorteAnimal;
 import com.adocaofacil.adocaopets.enumClasses.SexoAnimal;
 import com.adocaofacil.adocaopets.enumClasses.StatusAnimal;
 import com.adocaofacil.adocaopets.model.users.OngModel;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,4 +58,13 @@ public class AnimalModel {
     @ManyToOne
     @JoinColumn(name = "id_ong", foreignKey = @ForeignKey(name = "fk_animal_ong"))
     private OngModel ong;
+
+     @Transient
+    @JsonProperty("imagem_base64")
+    public String getImagemBase64() {
+        if (foto != null) {
+            return "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(foto);
+        }
+        return null;
+    }
 }

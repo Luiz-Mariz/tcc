@@ -8,5 +8,6 @@ public enum StatusAnimal {
     disponivel,
     adotado,
     emTratamento,
-    perdido
+    perdido,
+    disponível
 }
