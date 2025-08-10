@@ -1,61 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detalhes do Pet - Max - AdoteBH</title>
+    <title>Detalhes do Pet - AdoteBH</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
         }
-        /* Custom scrollbar for better aesthetics */
+
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #e2e8f0;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #a78bfa;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #8b5cf6;
         }
     </style>
 </head>
+
 <body class="text-gray-800 flex flex-col min-h-screen antialiased">
 
     <header class="bg-purple-800 fixed top-0 left-0 w-full z-50 shadow-lg">
         <div class="container mx-auto px-4 flex justify-between items-center h-16">
-            <a href="index.html" class="text-white font-extrabold text-2xl sm:text-3xl tracking-wide" aria-label="Página inicial Adote BH">
+            <a href="TelaInicial.html" class="text-white font-extrabold text-2xl sm:text-3xl tracking-wide"
+                aria-label="Página inicial Adote BH">
                 Adote<span class="text-orange-400">BH</span>
             </a>
-
             <nav class="hidden md:flex items-center space-x-6" aria-label="Navegação Principal">
-                <a href="TelaProcAdotar.html" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md">Quero Adotar</a>
-                <a href="TelaSejaParceiro.html" class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md">Seja Nosso Parceiro</a>
-                <a href="TelaLogin.html" class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow transition duration-300 ease-in-out">
+                <a href="TelaProcAdotar.html"
+                    class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md">Quero
+                    Adotar</a>
+                <a href="TelaSejaParceiro.html"
+                    class="text-gray-200 hover:text-white font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md">Seja
+                    Nosso Parceiro</a>
+                <a href="TelaLogin.html"
+                    class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow transition duration-300 ease-in-out">
                     Entrar
                 </a>
             </nav>
-
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-label="Abrir menu de navegação">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none"
+                aria-label="Abrir menu de navegação">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
                 </svg>
             </button>
         </div>
-
         <nav id="mobile-menu" class="md:hidden bg-purple-700 pb-4 hidden" aria-label="Navegação Mobile">
-            <a href="index.html#quero-adotar" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero Adotar</a>
-            <a href="index.html#seja-nosso-parceiro" class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja Nosso Parceiro</a>
-            <a href="TelaLogin.html" class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded-full text-sm shadow transition duration-300 ease-in-out text-center">
+            <a href="TelaInicial.html#galeria-pets"
+                class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Quero
+                Adotar</a>
+            <a href="TelaSejaParceiro.html"
+                class="block text-gray-200 hover:text-white px-4 py-2 text-sm transition duration-300 ease-in-out">Seja
+                Nosso Parceiro</a>
+            <a href="TelaLogin.html"
+                class="block bg-purple-600 hover:bg-purple-500 text-white mx-4 mt-2 px-4 py-2 rounded-full text-sm shadow transition duration-300 ease-in-out text-center">
                 Entrar
             </a>
         </nav>
@@ -66,75 +85,61 @@
     <main class="flex-1 p-6 md:p-8">
         <div class="flex justify-between items-center mb-8 max-w-4xl mx-auto">
             <h1 class="text-3xl font-bold text-purple-800">Detalhes do Pet</h1>
-            <a href="TelaInicial.html" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full shadow hover:bg-gray-300 transition duration-300 font-semibold">
+            <a href="TelaInicial.html"
+                class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full shadow hover:bg-gray-300 transition duration-300 font-semibold">
                 <i class="fas fa-arrow-left mr-2"></i> Voltar
             </a>
         </div>
 
-        <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto flex flex-col lg:flex-row gap-8">
+        <div id="loading" class="text-center text-xl text-gray-600">Carregando dados do pet...</div>
+
+        <div id="not-found" class="text-center text-xl text-red-500 hidden">
+            Pet não encontrado. Verifique o ID.
+        </div>
+
+        <section id="pet-details-section"
+            class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto flex flex-col lg:flex-row gap-8 hidden">
             <div class="lg:w-1/2 flex flex-col items-center">
-                <img class="w-full h-80 object-cover rounded-xl shadow-md mb-6" src="https://images.unsplash.com/photo-1548681525-ee8f34f68673?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Foto do Pet Max">
-                
-                <h2 class="text-3xl font-bold text-purple-700 mb-4">Max <span class="text-gray-500 text-lg font-normal">- Labrador</span></h2>
-                
-                <div class="flex flex-wrap justify-center gap-3 mb-6">
-                    <span class="bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-dog mr-2"></i> Cachorro
-                    </span>
-                    <span class="bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-calendar-alt mr-2"></i> Jovem (2 anos)
-                    </span>
-                    <span class="bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-ruler-horizontal mr-2"></i> Grande
-                    </span>
-                    <span class="bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-mars mr-2"></i> Macho
-                    </span>
-                </div>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <span class="bg-green-100 text-green-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-syringe mr-2"></i> Vacinado
-                    </span>
-                    <span class="bg-green-100 text-green-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-cut mr-2"></i> Castrado
-                    </span>
-                    <span class="bg-green-100 text-green-800 text-sm font-semibold px-4 py-1.5 rounded-full flex items-center">
-                        <i class="fas fa-capsules mr-2"></i> Vermifugado
-                    </span>
-                </div>
+                <img id="pet-image" class="w-full h-80 object-cover rounded-xl shadow-md mb-6" src="" alt="Foto do Pet">
+
+                <h2 id="pet-name-and-breed" class="text-3xl font-bold text-purple-700 mb-4"></h2>
+
+                <div id="pet-info-badges" class="flex flex-wrap justify-center gap-3 mb-6">
+                    </div>
+
+                <div id="pet-health-badges" class="flex flex-wrap justify-center gap-3">
+                    </div>
             </div>
 
             <div class="lg:w-1/2">
                 <h3 class="text-2xl font-bold text-gray-700 mb-4 flex items-center">
-                    <i class="fas fa-info-circle text-purple-600 mr-2"></i> Sobre o Max
+                    <i class="fas fa-info-circle text-purple-600 mr-2"></i> Sobre o Pet
                 </h3>
-                <p class="text-gray-700 leading-relaxed mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    Max é um Labrador super carinhoso e cheio de energia, perfeito para famílias ativas. Ele adora longos passeios no parque, brincar de buscar a bolinha e nadar. É muito sociável com crianças de todas as idades e se dá bem com outros cães. Embora brincalhão, sabe ser tranquilo dentro de casa, especialmente à noite, quando prefere se aninhar perto dos tutores. Ele é um excelente companheiro e está pronto para encontrar um lar amoroso para sempre.
+                <p id="pet-description"
+                    class="text-gray-700 leading-relaxed mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
                 </p>
 
                 <h3 class="text-2xl font-bold text-gray-700 mb-4 flex items-center">
                     <i class="fas fa-heartbeat text-red-500 mr-2"></i> Saúde
                 </h3>
-                <ul class="list-none space-y-3 text-gray-700 mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <li class="flex items-center">
-                        <i class="fas fa-calendar-check text-purple-500 mr-3 text-lg"></i> **Último Check-up:** Junho/2025 - Tudo em ordem!
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-lightbulb text-yellow-500 mr-3 text-lg"></i> **Observações:** Nenhuma condição de saúde especial conhecida. Dieta balanceada com ração premium.
-                    </li>
+                <ul id="pet-health-info"
+                    class="list-none space-y-3 text-gray-700 mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
                 </ul>
 
                 <h3 class="text-2xl font-bold text-gray-700 mb-4 flex items-center">
                     <i class="fas fa-home text-yellow-600 mr-2"></i> Lar Ideal
                 </h3>
-                <p class="text-gray-700 leading-relaxed mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    Max busca uma casa com quintal ou acesso regular a áreas abertas para correr. Uma família que goste de atividades ao ar livre e possa dedicar tempo para brincadeiras e exercícios seria perfeita. Ele se adapta bem a ambientes com crianças e outros pets, desde que haja espaço para todos.
+                <p id="pet-ideal-home"
+                    class="text-gray-700 leading-relaxed mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
                 </p>
 
+                <!-- === INFORMAÇÕES DA ONG (inserido) === -->
+                <div id="ong-info" class="mb-6">
+                    <!-- Conteúdo preenchido via JS -->
+                </div>
+
                 <div class="mt-8 text-center">
-                    <button class="bg-purple-700 text-white px-8 py-3 rounded-full shadow-lg hover:bg-purple-800 transition duration-300 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-                        <i class="fas fa-handshake mr-2"></i> Adotar o Max!
-                    </button>
+                    <div id="adotar-button-container" class="mt-8 text-center"></div>
                 </div>
             </div>
         </section>
@@ -150,11 +155,9 @@
             </nav>
         </div>
     </footer>
-    
-    <script>
-        document.getElementById('mobile-menu-button').onclick = function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        };
-    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/front/assents/TelaInforPet.js"></script>
 </body>
+
 </html>
