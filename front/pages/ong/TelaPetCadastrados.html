@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pets Cadastrados - AdoteBH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #a78bfa;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        /* Classes para a sobreposição da sidebar em telas pequenas */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            /* Abaixo da sidebar */
+            display: none;
+            /* Inicia oculto */
+        }
+
+        .overlay.active {
+            display: block;
+            /* Mostra quando a sidebar está ativa */
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 flex min-h-screen">
+    <div class="overlay" id="sidebar-overlay"></div>
+
+    <aside
+        class="w-64 bg-white shadow-xl fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
+        id="sidebar">
+        <div class="flex justify-between items-center mb-8">
+            <a href="TelaInicial.html" class="flex items-center gap-2">
+                <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span></h2>
+            </a>
+            <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label="Fechar menu lateral">
+                <i class="las la-times text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="flex items-center gap-4 mb-8 p-3 bg-purple-50 rounded-lg" id="user-profile-info">
+            <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
+            <div>
+                <strong class="block text-gray-900 text-lg">Carregando...</strong>
+            </div>
+        </div>
+
+        <nav class="flex-grow">
+            <ul class="space-y-2">
+                <li>
+                    <a href="TelaCadastroPet.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="fas fa-plus text-xl"></i> Cadastrar Pet
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaPetCadastrados.html"
+                        class="flex items-center gap-3 p-3 bg-purple-600 text-white rounded-lg transition duration-300 font-medium"
+                        aria-current="page">
+                        <i class="las la-paw text-xl"></i> Pets Cadastrados
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaAgendaVisita.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-calendar text-xl"></i> Agenda de Visitas
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaMinhaConta.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-user text-xl"></i> Minha Conta
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mt-8 pt-4 border-t border-gray-200">
+            <a href="TelaLogin.html"
+                class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium">
+                <i class="las la-sign-out-alt text-xl"></i> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="flex-1 md:ml-64 p-6 md:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <button id="sidebar-open-button"
+                    class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
+                    aria-label="Abrir menu lateral">
+                    <i class="las la-bars text-3xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-4xl font-bold text-purple-800">Pets Cadastrados</h1>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="pets-grid">
+                <div
+                    class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-5 text-center">
+                    <i class="las la-spinner la-spin text-4xl text-purple-500 mb-4"></i>
+                    <p class="text-gray-600">Carregando pets...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal de edição -->
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg p-6 w-96 max-w-full mx-4">
+            <h2 class="text-xl font-bold mb-4">Editar Pet</h2>
+            <form id="editPetForm" class="space-y-4">
+                <input type="hidden" id="editPetId" />
+
+                <div>
+                    <label for="editNome" class="block font-semibold mb-1">Nome</label>
+                    <input type="text" id="editNome" class="w-full border rounded p-2" required />
+                </div>
+
+                <div>
+                    <label for="editIdade" class="block font-semibold mb-1">Idade</label>
+                    <input type="text" id="editIdade" class="w-full border rounded p-2" />
+                </div>
+
+                <div>
+                    <label for="editPorte" class="block font-semibold mb-1">Porte</label>
+                    <select id="editPorte" class="w-full border rounded p-2">
+                        <option value="">Selecione o porte</option>
+                        <option value="PEQUENO">Pequeno</option>
+                        <option value="MEDIO">Médio</option>
+                        <option value="GRANDE">Grande</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="editSexo" class="block font-semibold mb-1">Sexo</label>
+                    <select id="editSexo" class="w-full border rounded p-2">
+                        <option value="MACHO">Macho</option>
+                        <option value="FEMEA">Fêmea</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeEditForm()"
+                        class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition">Cancelar</button>
+                    <button type="submit"
+                        class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOpenButton = document.getElementById('sidebar-open-button');
+        const sidebarCloseButton = document.getElementById('sidebar-close-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const userProfileInfo = document.getElementById('user-profile-info');
+        const petsGrid = document.getElementById('pets-grid');
+
+        const API_BASE_URL = 'http://localhost:8080/api/animal';
+
+        let petsCache = [];
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        sidebarOpenButton.addEventListener('click', openSidebar);
+        sidebarCloseButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                if (!sidebar.classList.contains('translate-x-0')) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+
+        if (window.innerWidth >= 768) {
+            sidebar.classList.remove('-translate-x-full');
+        }
+
+        function updateHeaderProfile() {
+            const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+            displayUserProfile(storedUser);
+        }
+
+        function displayUserProfile(user) {
+            if (!userProfileInfo) return;
+            const userName = user.nome || 'Usuário';
+            const userPhoto = user.foto_url || 'https://placehold.co/40x40';
+            const profileLink = user.nome ? '/front/paginas/perfil.html' : '/front/paginas/TelaLogin.html';
+
+            userProfileInfo.innerHTML = `
+                <a id="profile-link" href="${profileLink}" class="flex items-center space-x-2">
+                    <img src="${userPhoto}" alt="Foto de perfil do usuário"
+                        class="w-10 h-10 rounded-full object-cover border-2 border-purple-300" />
+                    <div>
+                        <strong class="block text-gray-900 text-lg">${userName}</strong>
+                    </div>
+                </a>
+            `;
+        }
+
+        function renderPets(pets) {
+            petsCache = pets;
+
+            petsGrid.innerHTML = '';
+
+            if (pets.length === 0) {
+                petsGrid.innerHTML = `
+                    <div class="col-span-full bg-white p-8 rounded-2xl shadow-lg text-center text-gray-600">
+                        <i class="las la-exclamation-circle text-6xl text-yellow-500 mb-4"></i>
+                        <p class="text-xl font-semibold">Nenhum pet cadastrado ainda!</p>
+                        <p class="mt-2">Use a opção "Cadastrar Pet" para adicionar novos animais.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            pets.forEach(pet => {
+                const card = document.createElement('div');
+                card.classList.add('bg-white', 'rounded-2xl', 'shadow-lg', 'overflow-hidden', 'border', 'border-gray-100', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300', 'ease-in-out');
+
+                const tagsHtml = pet.characteristics ? pet.characteristics.map(tag => {
+                    let bgColor = 'bg-gray-100';
+                    let textColor = 'text-gray-800';
+                    if (tag.toLowerCase().includes('vacinado') || tag.toLowerCase().includes('castrado') || tag.toLowerCase().includes('vermifugado')) {
+                        bgColor = 'bg-green-100';
+                        textColor = 'text-green-800';
+                    } else if (tag.toLowerCase().includes('brincalhão') || tag.toLowerCase().includes('sociável') || tag.toLowerCase().includes('energético')) {
+                        bgColor = 'bg-blue-100';
+                        textColor = 'text-blue-800';
+                    } else if (tag.toLowerCase().includes('calmo') || tag.toLowerCase().includes('timido')) {
+                        bgColor = 'bg-yellow-100';
+                        textColor = 'text-yellow-800';
+                    }
+                    return `<span class="${bgColor} ${textColor} text-xs font-semibold px-2.5 py-0.5 rounded-full">${tag}</span>`;
+                }).join('') : '';
+
+                card.innerHTML = `
+                    <img class="w-full h-48 object-cover" src="${pet.imagem_base64 || 'https://via.placeholder.com/300'}" alt="Foto do Pet ${pet.nome}">
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-purple-700 mb-2">${pet.nome || 'Nome do Pet'} <span class="text-sm font-normal text-gray-500">- ${pet.raca || 'Raça Desconhecida'}</span></h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            <span class="mr-2"><i class="las la-calendar"></i> ${pet.idade ? pet.idade + (parseInt(pet.idade) > 1 ? ' anos' : ' ano') : 'Idade Desconhecida'}</span>
+                            <span class="mr-2"><i class="las la-ruler-horizontal"></i> ${pet.porte || 'Porte Desconhecido'}</span>
+                            <span><i class="las la-${pet.sexo && pet.sexo.toUpperCase() === 'MACHO' ? 'mars' : 'venus'}"></i> ${pet.sexo || 'Sexo Desconhecido'}</span>
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">${tagsHtml}</div>
+                        <a href="TelaInforPet.html?id=${pet.id}" class="block bg-purple-600 text-white text-center py-2 rounded-full hover:bg-purple-700 transition duration-300 mb-2">
+                            Ver Detalhes <i class="las la-arrow-right ml-1"></i>
+                        </a>
+                        <button
+                            class="block w-full bg-yellow-400 text-black text-center py-2 rounded-full hover:bg-yellow-500 transition duration-300 mb-2"
+                            onclick="openEditForm(${pet.id})"
+                        >
+                            Editar <i class="fas fa-edit ml-1"></i>
+                        </button>
+                        <button
+                            class="block w-full bg-red-500 text-white text-center py-2 rounded-full hover:bg-red-600 transition duration-300"
+                            onclick="deletePet(${pet.id})"
+                        >
+                            Excluir <i class="fas fa-trash ml-1"></i>
+                        </button>
+                    </div>
+                `;
+                petsGrid.appendChild(card);
+            });
+        }
+
+        async function fetchPets() {
+            try {
+                const ong = JSON.parse(localStorage.getItem('user'));
+                if (!ong || !ong.id) throw new Error('ONG não identificada.');
+
+                const response = await fetch(`${API_BASE_URL}/ong/${ong.id}`);
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição de pets: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                renderPets(data);
+
+            } catch (error) {
+                console.error("Erro ao buscar pets:", error);
+                petsGrid.innerHTML = `
+                    <div class="col-span-full bg-red-50 p-8 rounded-2xl shadow-lg text-center text-red-700 border border-red-200">
+                        <i class="las la-exclamation-triangle text-6xl mb-4"></i>
+                        <p class="text-xl font-semibold">Erro ao carregar pets!</p>
+                        <p class="mt-2">Não foi possível buscar os pets. Verifique a conexão com a API.</p>
+                        <p class="text-sm mt-1">Detalhes: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Modal controls
+        const editModal = document.getElementById('editModal');
+        const editPetForm = document.getElementById('editPetForm');
+
+        function openEditForm(petId) {
+            const pet = petsCache.find(p => p.id === petId);
+            if (!pet) return alert('Pet não encontrado.');
+
+            document.getElementById('editPetId').value = pet.id;
+            document.getElementById('editNome').value = pet.nome || '';
+            document.getElementById('editIdade').value = pet.idade || '';
+            document.getElementById('editPorte').value = pet.porte || '';
+            document.getElementById('editSexo').value = pet.sexo ? pet.sexo.toUpperCase() : 'MACHO';
+
+            editModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditForm() {
+            editModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        editPetForm.addEventListener('submit', async e => {
+            e.preventDefault();
+
+            const id = document.getElementById('editPetId').value;
+            const nome = document.getElementById('editNome').value.trim();
+            const idade = document.getElementById('editIdade').value.trim();
+            const porte = document.getElementById('editPorte').value;
+            const sexo = document.getElementById('editSexo').value;
+
+            if (!nome) {
+                alert('Nome é obrigatório.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nome: nome,
+                        idade: idade,
+                        porte: porte,
+                        sexo: sexo === 'MACHO' ? 'MACHO' : 'FEMEA'
+                    }),
+                });
+                if (!response.ok) throw new Error('Erro ao atualizar pet.');
+
+                alert('Pet atualizado com sucesso!');
+                closeEditForm();
+                fetchPets();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        });
+
+        async function deletePet(petId) {
+            if (!confirm('Tem certeza que deseja excluir este pet? Esta ação não pode ser desfeita.')) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/${petId}`, {
+                    method: 'DELETE',
+                });
+                if (!response.ok) throw new Error('Erro ao excluir pet.');
+
+                alert('Pet excluído com sucesso!');
+                fetchPets();
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+
+        // Atualiza dados do usuário no header
+        updateHeaderProfile();
+
+        // Busca pets ao carregar a página
+        fetchPets();
+    </script>
+</body>
+
+</html>

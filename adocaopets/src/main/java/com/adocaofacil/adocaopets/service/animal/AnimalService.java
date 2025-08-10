@@ -80,4 +80,8 @@ public class AnimalService {
         }
         return false;
     }
+
+    public List<AnimalModel> listarPorOng(Long ongId) {
+        return repository.findByOngId(ongId);
+    }
 }

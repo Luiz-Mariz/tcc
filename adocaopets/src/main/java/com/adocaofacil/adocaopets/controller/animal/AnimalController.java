@@ -95,4 +95,26 @@ public ResponseEntity<AnimalModel> cadastrarAnimal(
             return null;
         }
     }
+
+    @GetMapping("/ong/{ongId}")
+    public ResponseEntity<List<AnimalModel>> listarPorOng(@PathVariable Long ongId) {
+       List<AnimalModel> animais = service.listarPorOng(ongId);
+        return ResponseEntity.ok(animais);
+    }
+
+    @PutMapping("/{id}")
+       public ResponseEntity<AnimalModel> atualizar(@PathVariable Long id, @RequestBody AnimalModel animalAtualizado) {
+        return service.buscarPorId(id).map(animalExistente -> {
+        // Atualiza os campos do animalExistente com os dados do animalAtualizado
+            animalExistente.setNome(animalAtualizado.getNome());
+            animalExistente.setIdade(animalAtualizado.getIdade());
+            animalExistente.setPorte(animalAtualizado.getPorte());
+            animalExistente.setSexo(animalAtualizado.getSexo());
+        // atualize outros campos conforme necessário
+
+            AnimalModel salvo = service.salvar(animalExistente);
+            return ResponseEntity.ok(salvo);
+    }).orElse(ResponseEntity.notFound().build());
+}
+    
 }
