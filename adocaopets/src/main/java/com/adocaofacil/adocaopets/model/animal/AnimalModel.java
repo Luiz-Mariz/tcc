@@ -59,7 +59,7 @@ public class AnimalModel {
     @JoinColumn(name = "id_ong", foreignKey = @ForeignKey(name = "fk_animal_ong"))
     private OngModel ong;
 
-     @Transient
+    @Transient
     @JsonProperty("imagem_base64")
     public String getImagemBase64() {
         if (foto != null) {

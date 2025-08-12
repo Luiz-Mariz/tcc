@@ -105,3 +105,8 @@ CREATE TABLE Adocao (
     FOREIGN KEY (id_pessoa) REFERENCES Tutor(id),
     FOREIGN KEY (id_animal) REFERENCES Animal(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO Tipo_Animal (especie) VALUES 
+('Cachorro'),
+('Gato'),
+('Ave');
