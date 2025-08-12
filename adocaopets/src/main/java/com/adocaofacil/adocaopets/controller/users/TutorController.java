@@ -1,5 +1,6 @@
 package com.adocaofacil.adocaopets.controller.users;
 
+import com.adocaofacil.adocaopets.model.users.OngModel;
 import com.adocaofacil.adocaopets.model.users.TutorModel;
 import com.adocaofacil.adocaopets.service.users.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,13 @@ public class TutorController {
         return service.buscarPorId(id)
                 .map(ResponseEntity :: ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<TutorModel> buscarPorIdUsuario(@PathVariable Long idUsuario) {
+        return service.buscarPorIdUsuario(idUsuario)
+               .map(ResponseEntity::ok)
+               .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping

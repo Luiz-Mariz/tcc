@@ -1,5 +1,7 @@
 package com.adocaofacil.adocaopets.model.users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,7 @@ public class TutorModel {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "fk_tutor_usuario"))
+    @JsonBackReference
     private  UsuarioModel usuario;
 
     @ManyToOne

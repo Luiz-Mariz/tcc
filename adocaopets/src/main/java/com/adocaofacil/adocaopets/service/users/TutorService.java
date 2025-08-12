@@ -29,4 +29,8 @@ public class TutorService {
     public void deletar(Long id){
         repository.deleteById(id);
     }
+
+    public Optional<TutorModel> buscarPorIdUsuario(Long idUsuario) {
+        return repository.findByUsuarioId(idUsuario);
+    }
 }

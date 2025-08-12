@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para deslogar
     function handleLogout() {
         localStorage.removeItem('user');
-        window.location.href = 'TelaLogin.html'; // Redireciona para a tela de login
+        window.location.href = '../TelaInicial.html'; // Redireciona para a tela de login
     }
 
     // Funções de manipulação de mensagens
