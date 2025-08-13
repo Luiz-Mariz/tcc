@@ -64,7 +64,7 @@ formLogin.addEventListener('submit', async (e) => {
 
         // Passo 4: Redireciona com base no tipo de usuário
         if (userData.tipoUsuario === 'tutor') {
-            window.location.href = "telaTutor.html";
+            window.location.href = "tutor/TelaInicialTutor.html";
         } else if (userData.tipoUsuario === 'ong') {
             window.location.href = "ong/telaInicialOng.html";
         } else if (userData.tipoUsuario === 'admin') {

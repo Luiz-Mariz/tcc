@@ -1,6 +1,7 @@
 package com.adocaofacil.adocaopets.model.animal;
 
 import com.adocaofacil.adocaopets.enumClasses.StatusAdoacao;
+import com.adocaofacil.adocaopets.model.users.OngModel;
 import com.adocaofacil.adocaopets.model.users.TutorModel;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,8 +28,12 @@ public class AdocaoModel {
     private StatusAdoacao status;
 
     @ManyToOne
-    @JoinColumn(name = "id_pessoa", nullable = false, foreignKey = @ForeignKey(name = "fk_adocao_pessoa"))
-    private TutorModel pessoa;
+    @JoinColumn(name = "id_tutor", nullable = false, foreignKey = @ForeignKey(name = "fk_adocao_pessoa"))
+    private TutorModel tutor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ong", nullable = false, foreignKey = @ForeignKey(name = "fk_adocao_ong"))
+    private OngModel ong;
 
     @ManyToOne
     @JoinColumn(name = "id_animal", nullable = false, foreignKey = @ForeignKey(name = "fk_adocao_animal"))
@@ -36,6 +41,9 @@ public class AdocaoModel {
 
     @Column(name = "data_peticao", columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private LocalDate dataPeticao;
+
+    @Column(name = " data_visita", columnDefinition = "DATE")
+    private LocalDate dataVisita;
 
     @Column(name = "data_conclusao", columnDefinition = "DATE")
     private LocalDate dataConclucao;
