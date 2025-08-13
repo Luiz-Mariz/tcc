@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdoteBH - Meu Perfil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a78bfa;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+        .focus-ring-purple-500:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+            border-color: #8b5cf6;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            display: none;
+        }
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-800 flex min-h-screen">
+    <div class="overlay" id="sidebar-overlay"></div>
+
+    <aside class="w-64 bg-white shadow-xl fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
+        <div class="flex justify-between items-center mb-8">
+            <a href="TelaInicial.html" class="flex items-center gap-2">
+                <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span></h2>
+            </a>
+            <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Fechar menu lateral">
+                <i class="las la-times text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="flex items-center gap-4 mb-8 p-3 bg-purple-50 rounded-lg" id="user-profile-info">
+            <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
+            <div>
+                <strong class="block text-gray-900 text-lg">Carregando...</strong>
+            </div>
+        </div>
+
+        <nav class="flex-grow">
+            <ul class="space-y-2">
+                <li>
+                    <a href="TelaAgendaVisita.html" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-calendar text-xl"></i> Agenda de Visitas
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center gap-3 p-3 text-white bg-purple-600 rounded-lg transition duration-300 font-medium" aria-current="page">
+                        <i class="las la-user text-xl"></i> Meu Perfil
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mt-8 pt-4 border-t border-gray-200">
+            <a href="TelaLogin.html" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium">
+                <i class="las la-sign-out-alt text-xl"></i> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="flex-1 md:ml-64 p-6 md:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <button id="sidebar-open-button" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Abrir menu lateral">
+                    <i class="las la-bars text-3xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-4xl font-bold text-purple-800">Meu Perfil</h1>
+                    <p class="text-lg text-gray-600 mt-1">Gerencie suas informações pessoais. <span class="text-blue-500">👤</span></p>
+                </div>
+            </div>
+        </header>
+
+        <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
+            <div class="flex items-center gap-6 mb-8 border-b pb-6 border-gray-200">
+                <div class="w-24 h-24 rounded-full bg-gray-200 flex-shrink-0 relative">
+                    <img id="profile-image" src="https://via.placeholder.com/100" alt="Foto de Perfil" class="w-full h-full rounded-full object-cover">
+                    <button class="absolute bottom-0 right-0 bg-purple-600 text-white p-2 rounded-full hover:bg-purple-700 transition duration-300">
+                        <i class="las la-camera text-lg"></i>
+                    </button>
+                </div>
+                <div>
+                    <h2 id="profile-name" class="text-3xl font-semibold text-gray-900">Nome do Usuário</h2>
+                    <p id="profile-email" class="text-md text-gray-500">email@example.com</p>
+                </div>
+            </div>
+
+            <form id="profile-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="Seu nome completo">
+                    </div>
+                    <div>
+                        <label for="cpf" class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                        <input type="text" id="cpf" name="cpf" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="000.000.000-00">
+                    </div>
+                    <div>
+                        <label for="telefone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="(99) 99999-9999">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-100 text-gray-500 cursor-not-allowed" disabled placeholder="seu.email@exemplo.com">
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Endereço</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="cep" class="block text-sm font-medium text-gray-700 mb-1">CEP</label>
+                            <input type="text" id="cep" name="cep" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="00000-000">
+                        </div>
+                        <div>
+                            <label for="rua" class="block text-sm font-medium text-gray-700 mb-1">Rua</label>
+                            <input type="text" id="rua" name="rua" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="Nome da Rua">
+                        </div>
+                        <div>
+                            <label for="bairro" class="block text-sm font-medium text-gray-700 mb-1">Bairro</label>
+                            <input type="text" id="bairro" name="bairro" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="Bairro">
+                        </div>
+                        <div>
+                            <label for="cidade" class="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
+                            <input type="text" id="cidade" name="cidade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="Cidade">
+                        </div>
+                        <div>
+                            <label for="estado" class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+                            <input type="text" id="estado" name="estado" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="Estado">
+                        </div>
+                        <div>
+                            <label for="numero" class="block text-sm font-medium text-gray-700 mb-1">Número</label>
+                            <input type="text" id="numero" name="numero" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="123">
+                        </div>
+                        <div>
+                            <label for="complemento" class="block text-sm font-medium text-gray-700 mb-1">Complemento</label>
+                            <input type="text" id="complemento" name="complemento" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" placeholder="Apartamento 101">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-300">
+                        Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOpenButton = document.getElementById('sidebar-open-button');
+        const sidebarCloseButton = document.getElementById('sidebar-close-button');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const userProfileInfo = document.getElementById('user-profile-info');
+
+        // ** Importante: Configure a URL base da sua API aqui! **
+        const API_BASE_URL = 'http://localhost:8080/api'; // <--- Altere esta linha!
+
+        // Função para abrir a sidebar
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Função para fechar a sidebar
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event Listeners para a Sidebar
+        sidebarOpenButton.addEventListener('click', openSidebar);
+        sidebarCloseButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Ajustes responsivos
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                if (!sidebar.classList.contains('translate-x-0')) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            }
+        });
+        if (window.innerWidth >= 768) {
+            sidebar.classList.remove('-translate-x-full');
+        }
+
+        /**
+         * Preenche o formulário e a interface com os dados do usuário.
+         * @param {Object} user - Objeto com os dados do usuário (ex: { nome, cpf, telefone, ... }).
+         */
+        function renderUserProfile(user) {
+            // Preenche o header do perfil
+            document.getElementById('profile-name').textContent = user.nome || 'Usuário';
+            document.getElementById('profile-email').textContent = user.email || 'email@exemplo.com';
+            // Placeholder para a imagem de perfil
+            const profileImage = document.getElementById('profile-image');
+            if (user.profileImage) {
+                 profileImage.src = user.profileImage;
+            }
+
+            // Preenche o formulário
+            document.getElementById('nome').value = user.nome || '';
+            document.getElementById('cpf').value = user.cpf || '';
+            document.getElementById('telefone').value = user.telefone || '';
+            document.getElementById('email').value = user.email || '';
+
+            // Preenche o endereço
+            if (user.endereco) {
+                document.getElementById('cep').value = user.endereco.cep || '';
+                document.getElementById('rua').value = user.endereco.rua || '';
+                document.getElementById('bairro').value = user.endereco.bairro || '';
+                document.getElementById('cidade').value = user.endereco.cidade || '';
+                document.getElementById('estado').value = user.endereco.estado || '';
+                document.getElementById('numero').value = user.endereco.numero || '';
+                document.getElementById('complemento').value = user.endereco.complemento || '';
+            }
+        }
+
+        /**
+         * Busca os dados do perfil do usuário na API e preenche a interface.
+         */
+        async function fetchUserProfile() {
+            try {
+                // Simulação de autenticação: assumindo um ID de usuário fixo ou obtido do localStorage
+                const userId = localStorage.getItem('userId') || 1; 
+                const response = await fetch(`${API_BASE_URL}/tutor/${userId}`);
+
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar perfil: ${response.status} ${response.statusText}`);
+                }
+                const user = await response.json();
+                renderUserProfile(user);
+
+                // Preenche a div do perfil na sidebar
+                userProfileInfo.innerHTML = `
+                    <img src="${user.profileImage || 'https://via.placeholder.com/40'}"
+                         alt="Foto de perfil do usuário"
+                         class="w-10 h-10 rounded-full object-cover border-2 border-purple-300" />
+                    <div>
+                        <strong class="block text-gray-900 text-lg">${user.nome || 'Usuário'}</strong>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Erro ao carregar dados do usuário:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ops...',
+                    html: `Não foi possível carregar seu perfil.<br>Verifique sua conexão ou a disponibilidade da API.<br><br><small>Detalhes: ${error.message}</small>`,
+                    confirmButtonColor: '#8b5cf6'
+                });
+                // Fallback para estado de erro na sidebar
+                userProfileInfo.innerHTML = `
+                    <img src="https://via.placeholder.com/40"
+                         alt="Erro ao carregar foto"
+                         class="w-10 h-10 rounded-full object-cover border-2 border-red-300" />
+                    <div>
+                        <strong class="block text-red-600 text-lg">Erro ao carregar perfil</strong>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Lida com a atualização dos dados do perfil.
+         */
+        async function updateProfile(event) {
+            event.preventDefault();
+            const form = event.target;
+            const userId = localStorage.getItem('userId') || 1;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Estruturar os dados para a API (separando dados de tutor e endereço)
+            const tutorData = {
+                nome: data.nome,
+                cpf: data.cpf,
+                telefone: data.telefone,
+            };
+
+            const enderecoData = {
+                cep: data.cep,
+                rua: data.rua,
+                bairro: data.bairro,
+                cidade: data.cidade,
+                estado: data.estado,
+                numero: data.numero,
+                complemento: data.complemento,
+            };
+
+            try {
+                // Atualizar o tutor
+                const tutorResponse = await fetch(`${API_BASE_URL}/tutor/${userId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(tutorData),
+                });
+                if (!tutorResponse.ok) {
+                    throw new Error('Erro ao atualizar os dados do tutor.');
+                }
+                
+                // Atualizar o endereço (se houver)
+                const enderecoId = await fetch(`${API_BASE_URL}/tutor/${userId}/endereco`).then(res => res.json()).then(data => data.id_endereco);
+                if (enderecoId) {
+                    const enderecoResponse = await fetch(`${API_BASE_URL}/endereco/${enderecoId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(enderecoData),
+                    });
+                    if (!enderecoResponse.ok) {
+                        throw new Error('Erro ao atualizar o endereço.');
+                    }
+                } else {
+                    // Lógica para criar um novo endereço se não existir
+                    // Em um cenário real, você faria um POST para /endereco e depois um PUT para /tutor para associar o id_endereco
+                }
+
+                Toastify({
+                    text: "Perfil atualizado com sucesso! 🎉",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #84cc16, #4ade80)",
+                    stopOnFocus: true,
+                }).showToast();
+
+                fetchUserProfile(); // Recarregar os dados para refletir as mudanças
+
+            } catch (error) {
+                console.error("Erro ao salvar perfil:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro ao salvar!',
+                    html: `Não foi possível salvar as alterações.<br><br><small>Detalhes: ${error.message}</small>`,
+                    confirmButtonColor: '#8b5cf6'
+                });
+            }
+        }
+
+        // Adiciona o event listener para o formulário
+        document.getElementById('profile-form').addEventListener('submit', updateProfile);
+
+        // Carrega os dados do perfil do usuário ao carregar a página
+        document.addEventListener('DOMContentLoaded', fetchUserProfile);
+    </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdoteBH - Agenda de Visitas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a78bfa;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        /* Estilos para focar nos inputs (mantidos do modelo) */
+        .focus-ring-purple-500:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+            border-color: #8b5cf6;
+        }
+
+        /* Classes para a sobreposição da sidebar em telas pequenas */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40; /* Abaixo da sidebar */
+            display: none; /* Inicia oculto */
+        }
+        .overlay.active {
+            display: block; /* Mostra quando a sidebar está ativa */
+        }
+
+        /* Ajustes responsivos para a tabela */
+        @media (max-width: 767px) {
+            .table-responsive tbody tr {
+                display: block; /* Cada linha da tabela vira um bloco */
+                margin-bottom: 1rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 0.5rem;
+                padding: 1rem;
+            }
+            .table-responsive thead {
+                display: none; /* Oculta o cabeçalho da tabela em telas pequenas */
+            }
+            .table-responsive td {
+                display: flex; /* Cada célula vira um flex item */
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid #e2e8f0; /* Linha divisória entre células */
+            }
+            .table-responsive td:last-child {
+                border-bottom: none; /* Remove a linha da última célula */
+            }
+            .table-responsive td:before {
+                content: attr(data-label); /* Usa o atributo data-label para mostrar o nome da coluna */
+                font-weight: 600;
+                margin-right: 1rem;
+                color: #4a5568;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 flex min-h-screen">
+    <div class="overlay" id="sidebar-overlay"></div>
+
+    <aside class="w-64 bg-white shadow-xl fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
+        <div class="flex justify-between items-center mb-8">
+    <a href="TelaInicial.html" class="flex items-center gap-2"> <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span></h2>
+    </a>
+    <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Fechar menu lateral">
+        <i class="las la-times text-2xl"></i>
+    </button>
+</div>
+
+        <div class="flex items-center gap-4 mb-8 p-3 bg-purple-50 rounded-lg" id="user-profile-info">
+            <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div> <div>
+                <strong class="block text-gray-900 text-lg">Carregando...</strong> </div>
+        </div>
+
+        <nav class="flex-grow">
+            <ul class="space-y-2">
+                <li>
+                    <a href="TelaCadastroPet.html" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="fas fa-plus text-xl"></i> Cadastrar Pet
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaPetCadastrados.html" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-paw text-xl"></i> Pets Cadastrados
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaAgendaVisita.html" class="flex items-center gap-3 p-3 text-white bg-purple-600 rounded-lg transition duration-300 font-medium" aria-current="page">
+                        <i class="las la-calendar text-xl"></i> Agenda de Visitas
+                    </a>
+                </li>
+                <li>
+                    <a href="TelaMeuPerfilOng.html" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
+                        <i class="las la-user text-xl"></i> Minha Conta
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mt-8 pt-4 border-t border-gray-200">
+            <a href="TelaLogin.html" class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium">
+                <i class="las la-sign-out-alt text-xl"></i> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="flex-1 md:ml-64 p-6 md:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <button id="sidebar-open-button" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Abrir menu lateral">
+                    <i class="las la-bars text-3xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-4xl font-bold text-purple-800">Agenda de Visitas</h1>
+                    <p class="text-lg text-gray-600 mt-1">Gerencie os agendamentos de pets para adoção. <span class="text-blue-500">🗓️</span></p>
+                </div>
+            </div>
+        </header>
+
+        <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-semibold text-purple-700 mb-6">Próximas Visitas</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 table-responsive">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Pet
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Interessado
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Contato
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Data/Hora
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="appointments-table-body">
+                        </tbody>
+                </table>
+            </div>
+
+        </section>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOpenButton = document.getElementById('sidebar-open-button');
+    const sidebarCloseButton = document.getElementById('sidebar-close-button');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const appointmentsTableBody = document.getElementById('appointments-table-body');
+    const userProfileInfo = document.getElementById('user-profile-info');
+
+    const API_BASE_URL = 'http://localhost:8080/api';
+
+    // Função para abrir a sidebar
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        sidebarOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Função para fechar a sidebar
+    function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event Listeners para a Sidebar
+    sidebarOpenButton.addEventListener('click', openSidebar);
+    sidebarCloseButton.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Observa mudanças no tamanho da tela para ajustar a sidebar
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        } else {
+            if (!sidebar.classList.contains('translate-x-0')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+    });
+
+    // Garante que a sidebar esteja visível em desktop ao carregar a página
+    if (window.innerWidth >= 768) {
+        sidebar.classList.remove('-translate-x-full');
+    }
+
+    // --- FUNÇÃO CORRIGIDA PARA O PERFIL DO USUÁRIO ---
+    function displayUserProfile() {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (!userProfileInfo) return;
+
+        const userName = user?.nome || 'Usuário'; // Usa a propriedade 'nome' do objeto de usuário
+        const userPhoto = user?.foto_url || 'https://placehold.co/40x40'; // Usa a propriedade 'foto_url'
+        const profileLink = user?.nome ? 'TelaMinhaConta.html' : 'TelaLogin.html';
+
+        userProfileInfo.innerHTML = `
+            <a href="${profileLink}" class="flex items-center gap-4 p-3 bg-purple-50 rounded-lg">
+                <img src="${userPhoto}"
+                    alt="Foto de perfil do usuário"
+                    class="w-10 h-10 rounded-full object-cover border-2 border-purple-300"
+                />
+                <div>
+                    <strong class="block text-gray-900 text-lg">${userName}</strong>
+                </div>
+            </a>
+        `;
+    }
+
+    // O restante do seu código JavaScript para agendamentos, etc., continua aqui.
+
+    /**
+     * Renderiza as linhas da tabela com os agendamentos.
+     * @param {Array<Object>} appointments - Array de objetos de agendamento.
+     */
+    function renderAppointments(appointments) {
+        appointmentsTableBody.innerHTML = '';
+        if (appointments.length === 0) {
+            appointmentsTableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">
+                        Nenhum agendamento encontrado.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        appointments.forEach(appointment => {
+            const row = document.createElement('tr');
+            row.classList.add('hover:bg-gray-50');
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap" data-label="Pet">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                            <img class="h-10 w-10 rounded-full object-cover" src="${appointment.petImage || 'https://via.placeholder.com/40'}" alt="${appointment.petName || 'Pet'}">
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">${appointment.petName || 'N/A'}</div>
+                            <div class="text-sm text-gray-500">${appointment.petBreed || 'N/A'}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" data-label="Interessado">
+                    <div class="text-sm text-gray-900">${appointment.interestedName || 'N/A'}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" data-label="Contato">
+                    <div class="text-sm text-gray-900">${appointment.interestedEmail || 'N/A'}</div>
+                    <div class="text-sm text-gray-500">${appointment.interestedPhone || 'N/A'}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" data-label="Data/Hora">
+                    <div class="text-sm text-gray-900">${appointment.date || 'N/A'}</div>
+                    <div class="text-sm text-gray-500">${appointment.time || 'N/A'}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" data-label="Status">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${appointment.status === 'Pendente' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}">
+                        ${appointment.status || 'N/A'}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" data-label="Ações">
+                    <button class="text-green-600 hover:text-green-900 mr-3" title="Marcar como Concluído" ${appointment.status === 'Concluído' ? 'disabled' : ''} data-id="${appointment.id}" data-action="complete">
+                        <i class="fas fa-check-circle text-lg"></i>
+                    </button>
+                    <button class="text-red-600 hover:text-red-900" title="Excluir Agendamento" data-id="${appointment.id}" data-action="delete">
+                        <i class="fas fa-trash-alt text-lg"></i>
+                    </button>
+                </td>
+            `;
+            appointmentsTableBody.appendChild(row);
+        });
+
+        addActionListener();
+    }
+
+    /**
+     * Busca os agendamentos da API.
+     */
+    async function fetchAppointments() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/appointments`);
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+            }
+            const data = await response.json();
+            renderAppointments(data);
+            
+            Toastify({
+                text: "Agenda carregada com sucesso!",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #84cc16, #4ade80)",
+                stopOnFocus: true,
+            }).showToast();
+
+        } catch (error) {
+            console.error("Erro ao buscar agendamentos:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: `Não foi possível carregar a agenda de visitas.<br>Verifique sua conexão ou a disponibilidade da API.<br><br><small>Detalhes: ${error.message}</small>`,
+                confirmButtonColor: '#8b5cf6'
+            });
+            appointmentsTableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-red-500">
+                        Erro ao carregar agendamentos.
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    /**
+     * Lida com a exclusão de um agendamento.
+     * @param {string} appointmentId - O ID do agendamento a ser excluído.
+     * @param {HTMLElement} rowElement - O elemento da linha da tabela a ser removido.
+     */
+    async function deleteAppointment(appointmentId, rowElement) {
+        const result = await Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter esta ação!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        });
+
+        if (!result.isConfirmed) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/appointments/${appointmentId}`, { method: 'DELETE' });
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Falha ao excluir agendamento');
+            }
+            
+            rowElement.remove();
+            
+            Swal.fire(
+                'Excluído!',
+                `O agendamento foi excluído com sucesso.`,
+                'success'
+            );
+
+        } catch (error) {
+            console.error(`Erro ao excluir agendamento ${appointmentId}:`, error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                html: `Não foi possível excluir o agendamento.<br><br><small>Detalhes: ${error.message}</small>`,
+                confirmButtonColor: '#8b5cf6'
+            });
+        }
+    }
+
+    /**
+     * Lida com a marcação de um agendamento como concluído.
+     * @param {string} appointmentId - O ID do agendamento a ser atualizado.
+     * @param {HTMLElement} buttonElement - O botão de conclusão clicado.
+     */
+    async function completeAppointment(appointmentId, buttonElement) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/appointments/${appointmentId}/complete`, { 
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: 'Concluído' })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Falha ao marcar como concluído');
+            }
+
+            const statusSpan = buttonElement.closest('tr').querySelector('[data-label="Status"] span');
+            if (statusSpan) {
+                statusSpan.classList.remove('bg-yellow-100', 'text-yellow-800');
+                statusSpan.classList.add('bg-green-100', 'text-green-800');
+                statusSpan.textContent = 'Concluído';
+            }
+            buttonElement.disabled = true;
+
+            Swal.fire(
+                'Concluído!',
+                `Agendamento marcado como concluído.`,
+                'success'
+            );
+
+        } catch (error) {
+            console.error(`Erro ao concluir agendamento ${appointmentId}:`, error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                html: `Não foi possível marcar o agendamento como concluído.<br><br><small>Detalhes: ${error.message}</small>`,
+                confirmButtonColor: '#8b5cf6'
+            });
+        }
+    }
+
+    /**
+     * Adiciona os event listeners para os botões de ação na tabela.
+     */
+    function addActionListener() {
+        appointmentsTableBody.querySelectorAll('button[data-action="delete"]').forEach(button => {
+            button.onclick = (event) => {
+                const appointmentId = event.currentTarget.dataset.id;
+                const rowElement = event.currentTarget.closest('tr');
+                deleteAppointment(appointmentId, rowElement);
+            };
+        });
+
+        appointmentsTableBody.querySelectorAll('button[data-action="complete"]').forEach(button => {
+            button.onclick = (event) => {
+                const appointmentId = event.currentTarget.dataset.id;
+                completeAppointment(appointmentId, event.currentTarget);
+            };
+        });
+    }
+
+    // Carrega os agendamentos e o perfil do usuário quando a página é totalmente carregada
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchAppointments();
+        displayUserProfile(); // Chamada para carregar o perfil do usuário
+    });
+</script>
+        
+   
+</body>
+</html>
