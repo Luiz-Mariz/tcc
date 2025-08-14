@@ -1,6 +1,5 @@
 package com.adocaofacil.adocaopets.controller.users;
 
-import com.adocaofacil.adocaopets.model.users.OngModel;
 import com.adocaofacil.adocaopets.model.users.TutorModel;
 import com.adocaofacil.adocaopets.service.users.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;

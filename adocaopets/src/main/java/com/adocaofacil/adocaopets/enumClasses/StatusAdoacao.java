@@ -1,7 +1,7 @@
 package com.adocaofacil.adocaopets.enumClasses;
 
 public enum StatusAdoacao {
-    AGURADANDO_CONTADO,
+    AGUARDANDO_CONTATO,
     EM_ANDAMENTO,
     CONCLUIDO
 }
