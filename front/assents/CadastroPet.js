@@ -44,7 +44,7 @@ function updateHeaderProfile() {
 }
 function displayUserProfile(user) {
     if (!userProfileInfo) return;
-    const userName = user.nome || 'Usuário';
+    const userName = user.ong.nome || 'Usuário';
     const userPhoto = user.foto_url || 'https://placehold.co/40x40';
     const profileLink = user.nome ? '/front/paginas/perfil.html' : '/front/paginas/TelaLogin.html';
 
