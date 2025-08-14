@@ -1,257 +1,504 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AdoteBH - Minha Conta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AdoteBH - Agenda de Visitas</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
+          font-family: 'Poppins', sans-serif;
+          background: linear-gradient(to bottom right, #f8fafc, #f0f4f8);
         }
 
-        /* Custom scrollbar for better aesthetics */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+          width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 10px;
+          background: #e2e8f0;
+          border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #a78bfa;
-            border-radius: 10px;
+          background: #a78bfa;
+          border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #8b5cf6;
+          background: #8b5cf6;
         }
 
-        /* Estilos para focar nos inputs */
         .focus-ring-purple-500:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
-            border-color: #8b5cf6;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+          border-color: #8b5cf6;
         }
 
-        /* Classes para a sobreposição da sidebar em telas pequenas */
         .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 40;
-            /* Abaixo da sidebar */
-            display: none;
-            /* Inicia oculto */
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 40;
+          display: none;
         }
 
         .overlay.active {
+          display: block;
+        }
+
+        @media (max-width: 767px) {
+          .table-responsive tbody tr {
             display: block;
-            /* Mostra quando a sidebar está ativa */
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+          }
+
+          .table-responsive thead {
+            display: none;
+          }
+
+          .table-responsive td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+          }
+
+          .table-responsive td:last-child {
+            border-bottom: none;
+          }
+
+          .table-responsive td:before {
+            content: attr(data-label);
+            font-weight: 600;
+            margin-right: 1rem;
+            color: #4a5568;
+          }
         }
     </style>
 </head>
 
 <body class="text-gray-800 flex min-h-screen">
-    <div class="overlay" id="sidebar-overlay"></div>
+<div class="overlay" id="sidebar-overlay"></div>
 
-    <aside
+<aside
         class="w-64 bg-white shadow-xl fixed h-full p-6 flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
-        id="sidebar">
-        <div class="flex justify-between items-center mb-8">
-            <a href="TelaInicialOng.html" class="flex items-center gap-2">
-                <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span>
-                </h2>
-            </a>
-            <button id="sidebar-close-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
-                aria-label="Fechar menu lateral">
-                <i class="las la-times text-2xl"></i>
-            </button>
-        </div>
-
-        <div class="mb-8" id="user-profile-info">
-            <div class="flex items-center gap-4 p-3 bg-purple-50 rounded-lg">
-                <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
-                <div>
-                    <strong class="block text-gray-900 text-lg">Carregando...</strong>
-                </div>
-            </div>
-        </div>
-
-        <nav class="flex-grow">
-            <ul class="space-y-2">
-                <li>
-                    <a href="TelaCadastroPet.html"
-                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium"
-                        aria-current="page">
-                        <i class="fas fa-plus text-xl"></i> Cadastrar Pet
-                    </a>
-                </li>
-                <li>
-                    <a href="TelaPetCadastrados.html"
-                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
-                        <i class="las la-paw text-xl"></i> Pets Cadastrados
-                    </a>
-                </li>
-                <li>
-                    <a href="TelaAgendaVisita.html"
-                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium">
-                        <i class="las la-calendar text-xl"></i> Agenda de Visitas
-                    </a>
-                </li>
-                <li>
-                    <a href="TelaMinhaConta.html"
-                        class="flex items-center gap-3 p-3 bg-purple-600 text-white rounded-lg transition duration-300 font-medium">
-                        <i class="las la-user text-xl"></i> Minha Conta
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="mt-8 pt-4 border-t border-gray-200">
-            <a href="TelaLogin.html"
-                class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium">
-                <i class="las la-sign-out-alt text-xl"></i> Sair
-            </a>
-        </div>
-    </aside>
-
-    <div class="flex-1 md:ml-64 p-6 md:p-8">
-        <header class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-4">
-                <button id="sidebar-open-button"
-                    class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
-                    aria-label="Abrir menu lateral">
-                    <i class="las la-bars text-3xl"></i>
-                </button>
-                <div>
-                    <h1 class="text-4xl font-bold text-purple-800">Minha Conta</h1>
-                    <p class="text-lg text-gray-600 mt-1">Gerencie suas informações de perfil e contato. <span
-                            class="text-orange-400">📝</span></p>
-                </div>
-            </div>
-        </header>
-
-        <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto">
-            <h2 class="text-2xl font-semibold text-purple-700 mb-6">Informações da ONG</h2>
-            <form id="profile-form">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome da ONG</label>
-                        <input type="text" id="nome" name="nome"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="cnpj" class="block text-sm font-medium text-gray-700 mb-1">CNPJ</label>
-                        <input type="text" id="cnpj" name="cnpj"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="responsavel_nome" class="block text-sm font-medium text-gray-700 mb-1">Nome do
-                            Responsável</label>
-                        <input type="text" id="responsavel_nome" name="responsavel_nome"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-                        <input type="email" id="email" name="email"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="telefone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled>
-                    </div>
-                    <div>
-                        <label for="instagram" class="block text-sm font-medium text-gray-700 mb-1">Instagram</label>
-                        <input type="text" id="instagram" name="instagram"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled>
-                    </div>
-                </div>
-
-                <h3 class="text-lg font-semibold text-purple-700 mb-4 mt-8">Endereço</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label for="cep" class="block text-sm font-medium text-gray-700 mb-1">CEP</label>
-                        <input type="text" id="cep" name="cep"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="logradouro" class="block text-sm font-medium text-gray-700 mb-1">Logradouro</label>
-                        <input type="text" id="logradouro" name="logradouro"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="numero" class="block text-sm font-medium text-gray-700 mb-1">Número</label>
-                        <input type="number" id="numero" name="numero"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="complemento"
-                            class="block text-sm font-medium text-gray-700 mb-1">Complemento</label>
-                        <input type="text" id="complemento" name="complemento"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled>
-                    </div>
-                    <div>
-                        <label for="bairro" class="block text-sm font-medium text-gray-700 mb-1">Bairro</label>
-                        <input type="text" id="bairro" name="bairro"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="cidade" class="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
-                        <input type="text" id="cidade" name="cidade"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                    <div>
-                        <label for="estado" class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
-                        <input type="text" id="estado" name="estado"
-                            class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus-ring-purple-500 sm:text-sm"
-                            disabled required>
-                    </div>
-                </div>
-
-                <div class="mt-8 flex justify-end gap-4">
-                    <button type="button" id="edit-button"
-                        class="bg-purple-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-purple-700 transition duration-300 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-                        <i class="las la-edit mr-2"></i> Editar
-                    </button>
-                    <button type="submit" id="save-button"
-                        class="bg-purple-700 text-white px-8 py-3 rounded-full shadow-lg hover:bg-purple-800 transition duration-300 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 hidden">
-                        <i class="las la-save mr-2"></i> Salvar
-                    </button>
-                </div>
-            </form>
-        </section>
+        id="sidebar"
+>
+    <div class="flex justify-between items-center mb-8">
+        <a href="TelaInicial.html" class="flex items-center gap-2">
+            <h2 class="text-3xl font-extrabold text-purple-700">Adote<span class="text-orange-500">BH</span></h2>
+        </a>
+        <button
+                id="sidebar-close-button"
+                class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label="Fechar menu lateral"
+        >
+            <i class="las la-times text-2xl"></i>
+        </button>
     </div>
 
-    <script src="/front/assents/TelaMeuPerfilOng.js"></script>
+    <div class="flex items-center gap-4 mb-8 p-3 bg-purple-50 rounded-lg" id="user-profile-info">
+        <div class="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
+        <div>
+            <strong class="block text-gray-900 text-lg">Carregando...</strong>
+        </div>
+    </div>
 
+    <nav class="flex-grow">
+        <ul class="space-y-2">
+            <li>
+                <a
+                        href="TelaCadastroPet.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium"
+                >
+                    <i class="fas fa-plus text-xl"></i> Cadastrar Pet
+                </a>
+            </li>
+            <li>
+                <a
+                        href="TelaPetCadastrados.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium"
+                >
+                    <i class="las la-paw text-xl"></i> Pets Cadastrados
+                </a>
+            </li>
+            <li>
+                <a
+                        href="TelaAgendaVisita.html"
+                        class="flex items-center gap-3 p-3 text-white bg-purple-600 rounded-lg transition duration-300 font-medium"
+                        aria-current="page"
+                >
+                    <i class="las la-calendar text-xl"></i> Agenda de Visitas
+                </a>
+            </li>
+            <li>
+                <a
+                        href="TelaMeuPerfilOng.html"
+                        class="flex items-center gap-3 p-3 text-gray-700 hover:bg-purple-600 hover:text-white rounded-lg transition duration-300 font-medium"
+                >
+                    <i class="las la-user text-xl"></i> Minha Conta
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="mt-8 pt-4 border-t border-gray-200">
+        <a
+                href="TelaLogin.html"
+                class="flex items-center gap-3 p-3 text-gray-700 hover:bg-red-500 hover:text-white rounded-lg transition duration-300 font-medium"
+        >
+            <i class="las la-sign-out-alt text-xl"></i> Sair
+        </a>
+    </div>
+</aside>
+
+<div class="flex-1 md:ml-64 p-6 md:p-8">
+    <header class="flex justify-between items-center mb-8">
+        <div class="flex items-center gap-4">
+            <button
+                    id="sidebar-open-button"
+                    class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
+                    aria-label="Abrir menu lateral"
+            >
+                <i class="las la-bars text-3xl"></i>
+            </button>
+            <div>
+                <h1 class="text-4xl font-bold text-purple-800">Agenda de Visitas</h1>
+                <p class="text-lg text-gray-600 mt-1">
+                    Gerencie os agendamentos de pets para adoção.
+                    <span class="text-blue-500">🗓️</span>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
+        <h2 class="text-2xl font-semibold text-purple-700 mb-6">Próximas Visitas</h2>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 table-responsive">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pet</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tutor</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefone</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ONG</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Petição</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Visita</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Conclusão</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Observações</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                </tr>
+                </thead>
+                <tbody id="appointments-table-body" class="bg-white divide-y divide-gray-200"></tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOpenButton = document.getElementById('sidebar-open-button');
+    const sidebarCloseButton = document.getElementById('sidebar-close-button');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const appointmentsTableBody = document.getElementById('appointments-table-body');
+    const userProfileInfo = document.getElementById('user-profile-info');
+
+    const API_BASE_URL = 'http://localhost:8080/api/adocao'; // Ajuste para seu endpoint
+
+    // Abrir sidebar
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      sidebarOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Fechar sidebar
+    function closeSidebar() {
+      sidebar.classList.add('-translate-x-full');
+      sidebarOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    sidebarOpenButton.addEventListener('click', openSidebar);
+    sidebarCloseButton.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Formatar datas em pt-BR com opções
+    function formatDateTime(dateTimeStr) {
+      if (!dateTimeStr) return '—';
+      const date = new Date(dateTimeStr);
+      return date.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('pt-BR');
+    }
+
+    // Status com badge colorido (retorna string HTML)
+    function formatStatus(status) {
+      switch (status) {
+        case 'AGUARDANDO_CONTATO':
+          return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-yellow-800">Aguardando Contato</span>`;
+        case 'CONCLUIDO':
+          return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">Concluído</span>`;
+        case 'CANCELADO':
+          return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">Cancelado</span>`;
+        default:
+          return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">${status}</span>`;
+      }
+    }
+
+    // Carregar dados do usuário
+    function updateHeaderProfile() {
+    const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+    displayUserProfile(storedUser);
+}
+function displayUserProfile(user) {
+    if (!userProfileInfo) return;
+    const userName = user.ong.nome || 'Usuário';
+    const userPhoto = user.foto_url || 'https://placehold.co/40x40';
+    const profileLink = user.nome ? '/front/paginas/perfil.html' : '/front/paginas/TelaLogin.html';
+
+    userProfileInfo.innerHTML = `
+        <a id="profile-link" href="${profileLink}" class="flex items-center space-x-2">
+            <img src="${userPhoto}" alt="Foto de perfil do usuário" class="w-10 h-10 rounded-full object-cover border-2 border-purple-300" />
+            <div>
+                <strong class="block text-gray-900 text-lg">${userName}</strong>
+            </div>
+        </a>
+    `;
+}
+    // Carregar agendamentos
+    async function loadAppointments() {
+      appointmentsTableBody.innerHTML = '';
+      try {
+        const response = await fetch(API_BASE_URL);
+        if (!response.ok) throw new Error('Erro ao carregar agendamentos.');
+
+        const appointments = await response.json();
+
+        appointments.forEach((appointment) => {
+          const {
+            id,
+            status,
+            tutor,
+            ong,
+            animal,
+            dataPeticao,
+            dataVisita,
+            dataConclucao,
+            observacoes,
+          } = appointment;
+
+          const petNome = animal?.nome || '—';
+          const tutorNome = tutor?.nome || '—';
+          const tutorTelefone = tutor?.telefone || '—';
+          const ongNome = ong?.nome || '—';
+          const dataPeticaoFormatada = formatDateTime(dataPeticao);
+          const dataConclusaoFormatada = formatDate(dataConclucao);
+          const statusFormatado = formatStatus(status);
+          const obs = observacoes || '—';
+
+          // input date para dataVisita (editável somente se status != CONCLUIDO)
+          const dataVisitaInput = `
+            <input
+              type="date"
+              id="data-visita-${id}"
+              value="${dataVisita ? new Date(dataVisita).toISOString().split('T')[0] : ''}"
+              class="border border-gray-300 rounded px-2 py-1"
+              ${status === 'CONCLUIDO' ? 'disabled' : ''}
+            />
+          `;
+
+          const disabledButtons = status === 'CONCLUIDO' ? 'disabled' : '';
+
+          const row = `
+            <tr>
+              <td data-label="ID" class="px-6 py-4 whitespace-nowrap">${id}</td>
+              <td data-label="Pet" class="px-6 py-4 whitespace-nowrap">${petNome}</td>
+              <td data-label="Tutor" class="px-6 py-4 whitespace-nowrap">${tutorNome}</td>
+              <td data-label="Telefone" class="px-6 py-4 whitespace-nowrap">${tutorTelefone}</td>
+              <td data-label="ONG" class="px-6 py-4 whitespace-nowrap">${ongNome}</td>
+              <td data-label="Data Petição" class="px-6 py-4 whitespace-nowrap">${dataPeticaoFormatada}</td>
+              <td data-label="Data Visita" class="px-6 py-4 whitespace-nowrap">${dataVisitaInput}</td>
+              <td data-label="Data Conclusão" class="px-6 py-4 whitespace-nowrap">${dataConclusaoFormatada}</td>
+              <td data-label="Status" class="px-6 py-4 whitespace-nowrap">${statusFormatado}</td>
+              <td data-label="Observações" class="px-6 py-4 whitespace-nowrap">${obs}</td>
+              <td data-label="Ações" class="px-6 py-4 whitespace-nowrap text-right">
+                <button
+                  class="text-green-600 hover:text-green-900 mr-3"
+                  onclick="approveAppointment(${id})"
+                  title="Confirmar"
+                  ${disabledButtons}
+                >
+                  <i class="fas fa-check-circle"></i>
+                </button>
+                <button
+                  class="text-red-600 hover:text-red-900"
+                  onclick="cancelAppointment(${id})"
+                  title="Recusar"
+                  ${disabledButtons}
+                >
+                  <i class="fas fa-times-circle"></i>
+                </button>
+              </td>
+            </tr>
+          `;
+
+          appointmentsTableBody.insertAdjacentHTML('beforeend', row);
+        });
+      } catch (error) {
+        console.error(error);
+        appointmentsTableBody.innerHTML = `<tr><td colspan="11" class="text-center text-red-500 py-4">Erro ao carregar agendamentos.</td></tr>`;
+      }
+    }
+
+    // Aprovar agendamento (Confirmar)
+    async function approveAppointment(id) {
+  const dataVisitaInput = document.getElementById(`data-visita-${id}`);
+  const dataVisitaValue = dataVisitaInput ? dataVisitaInput.value : null;
+
+  if (!dataVisitaValue) {
+    Swal.fire('Erro', 'Por favor, selecione a data da visita antes de confirmar.', 'error');
+    return;
+  }
+
+  Swal.fire({
+    title: 'Confirmar agendamento?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, confirmar',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#22c55e',
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const responseGet = await fetch(`${API_BASE_URL}/${id}`);
+        if (!responseGet.ok) throw new Error('Agendamento não encontrado');
+
+        const appointment = await responseGet.json();
+
+        // Atualizar dados para envio
+        appointment.status = 'CONCLUIDO';
+        appointment.dataVisita = new Date(dataVisitaValue).toISOString();
+        appointment.dataConclusao = new Date().toISOString();
+
+        const responsePut = await fetch(`${API_BASE_URL}/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(appointment),
+        });
+
+        if (!responsePut.ok) throw new Error('Erro ao atualizar agendamento');
+
+        Toastify({
+          text: `Agendamento ${id} confirmado.`,
+          backgroundColor: 'linear-gradient(to right, #22c55e, #16a34a)',
+          duration: 3000,
+        }).showToast();
+
+        loadAppointments();
+      } catch (error) {
+        console.error(error);
+        Swal.fire('Erro', error.message, 'error');
+      }
+    }
+  });
+}
+
+
+    // Cancelar agendamento (Recusar)
+    async function cancelAppointment(id) {
+      const dataVisitaInput = document.getElementById(`data-visita-${id}`);
+      const dataVisitaValue = dataVisitaInput ? dataVisitaInput.value : null;
+
+      if (!dataVisitaValue) {
+        Swal.fire('Erro', 'Por favor, selecione a data da visita antes de recusar.', 'error');
+        return;
+      }
+
+      Swal.fire({
+        title: 'Recusar agendamento?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, recusar',
+        cancelButtonText: 'Voltar',
+        confirmButtonColor: '#dc2626',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const responseGet = await fetch(`${API_BASE_URL}/${id}`);
+            if (!responseGet.ok) throw new Error('Agendamento não encontrado');
+
+            const appointment = await responseGet.json();
+
+            appointment.status = 'CONCLUIDO';
+            appointment.dataVisita = dataVisitaValue;
+            appointment.dataConclucao = new Date().toISOString().split('T')[0];
+
+            const responsePut = await fetch(`${API_BASE_URL}/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(appointment),
+            });
+
+            if (!responsePut.ok) throw new Error('Erro ao atualizar agendamento');
+
+            Toastify({
+              text: `Agendamento ${id} recusado.`,
+              backgroundColor: 'linear-gradient(to right, #dc2626, #b91c1c)',
+              duration: 3000,
+            }).showToast();
+
+            loadAppointments();
+          } catch (error) {
+            console.error(error);
+            Swal.fire('Erro', error.message, 'error');
+          }
+        }
+      });
+    }
+
+    // Inicialização
+    updateHeaderProfile();
+    loadAppointments();
+
+</script>
 </body>
-
 </html>
