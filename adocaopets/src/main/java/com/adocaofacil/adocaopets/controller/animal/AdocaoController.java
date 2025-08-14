@@ -1,7 +1,6 @@
 package com.adocaofacil.adocaopets.controller.animal;
 
 import com.adocaofacil.adocaopets.model.animal.AdocaoModel;
-import com.adocaofacil.adocaopets.model.animal.AnimalModel;
 import com.adocaofacil.adocaopets.service.animal.AdocacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,34 +24,34 @@ public class AdocaoController {
     @GetMapping("/{id}")
     public ResponseEntity<AdocaoModel> buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id)
-                .map(ResponseEntity :: ok)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public AdocaoModel salvar(@RequestBody AdocaoModel adocaoModel){
+        System.out.println("Recebido: " + adocaoModel);
         return service.salvar(adocaoModel);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<AdocaoModel> atualizar(@PathVariable Long id, @RequestBody AdocaoModel adocaoModel){
+    public ResponseEntity<AdocaoModel> atualizar(@PathVariable Long id, @RequestBody AdocaoModel adocaoModel){
         if (!service.buscarPorId(id).isPresent()){
             return ResponseEntity.notFound().build();
         }
 
         adocaoModel.setId(id);
-
-        return ResponseEntity.notFound().build();
+        AdocaoModel atualizado = service.salvar(adocaoModel);  // Salva o objeto atualizado (update)
+        return ResponseEntity.ok(atualizado);
     }
 
-    @DeleteMapping
-    public ResponseEntity<AnimalModel> deletar (@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar (@PathVariable Long id){
         if (!service.buscarPorId(id).isPresent()){
             return ResponseEntity.notFound().build();
         }
 
         service.deletar(id);
-
         return ResponseEntity.noContent().build();
     }
 }
